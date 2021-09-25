@@ -1,10 +1,11 @@
 # Enable this to get bug fixes and support asap
-auto-update: true
+auto-update: false
 
 worlds:
 
   # The name of your world that is Earth.
   # This should be the name main world where people work on stuff and make bases.
+  # 如果你改了世界名字 请把以下的world改为你所改的名字
   earth-name: world
 
 aliens:

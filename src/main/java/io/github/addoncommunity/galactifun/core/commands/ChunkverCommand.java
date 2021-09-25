@@ -17,7 +17,7 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.data.persistent.Persis
 public final class ChunkverCommand extends SubCommand {
 
     public ChunkverCommand() {
-        super("chunkver", "Gets the chunk version of the current chunk", false);
+        super("chunkver", "获取当前世界的世界信息", false);
     }
 
     @Override
@@ -26,11 +26,11 @@ public final class ChunkverCommand extends SubCommand {
 
         Chunk chunk = p.getChunk();
         if (Galactifun.worldManager().getAlienWorld(chunk.getWorld()) == null) {
-            p.sendMessage(ChatColor.RED + "You are not on a Galactifun planet!");
+            p.sendMessage(ChatColor.RED + "你不在银河系的星球上!");
             return;
         }
 
-        p.sendMessage(ChatColor.GOLD + "This chunk was generated using " + PersistentDataAPI.getString(
+        p.sendMessage(ChatColor.GOLD + "此世界可用 " + PersistentDataAPI.getString(
                 chunk,
                 AlienWorld.CHUNK_VER_KEY,
                 "Galactifun vALPHA"

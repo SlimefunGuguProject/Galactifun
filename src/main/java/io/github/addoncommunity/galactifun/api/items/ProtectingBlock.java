@@ -47,15 +47,15 @@ public abstract class ProtectingBlock extends MenuBlock implements EnergyNetComp
     private static final Set<BlockPosition> allBlocks = new HashSet<>();
     private static final ItemStack ENABLED_ITEM = new CustomItemStack(
             Material.STRUCTURE_VOID,
-            "&aEnabled",
+            "&a启用",
             "",
-            "&7Click to disable"
+            "&7点击以关闭"
     );
     private static final ItemStack DISABLED_ITEM = new CustomItemStack(
             Material.BARRIER,
-            "&cDisabled",
+            "&c关闭",
             "",
-            "&7Click to enable"
+            "&7点击已启用"
     );
     private static int counter = 0;
 
@@ -177,12 +177,12 @@ public abstract class ProtectingBlock extends MenuBlock implements EnergyNetComp
         Location l = pos.toLocation();
         Block b = pos.getBlock();
         if (!BSUtils.getStoredBoolean(l, ENABLED)) {
-            updateHologram(b, "&cNot Enabled");
+            updateHologram(b, "&c未开启");
             return;
         }
 
         if (!BSUtils.getStoredBoolean(l, PROTECTING)) {
-            updateHologram(b, "&cNot Enough Energy");
+            updateHologram(b, "&c电量不足");
             return;
         }
 
@@ -200,7 +200,7 @@ public abstract class ProtectingBlock extends MenuBlock implements EnergyNetComp
         Optional<Set<BlockPosition>> returned = Util.floodFill(l, range);
         // not sealed; continue on to the next block
         if (returned.isEmpty()) {
-            updateHologram(pos.getBlock(), "&cArea Not Sealed or Too Big");
+            updateHologram(pos.getBlock(), "&c区域未密封或太大");
             return;
         }
 
@@ -209,7 +209,7 @@ public abstract class ProtectingBlock extends MenuBlock implements EnergyNetComp
             Galactifun.protectionManager().addProtection(bp, inst.getEffect(), inst.getProtection());
         }
 
-        updateHologram(b, "&aOperational");
+        updateHologram(b, "&a可操作");
     }
 
     @Override

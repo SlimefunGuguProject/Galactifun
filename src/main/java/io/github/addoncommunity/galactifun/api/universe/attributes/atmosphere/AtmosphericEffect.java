@@ -71,7 +71,7 @@ public final class AtmosphericEffect {
 
     public void apply(Player p, int level) {
         if (level > 0) {
-            p.sendMessage(ChatColor.RED + "You have been exposed to " + this + "!");
+            p.sendMessage(ChatColor.RED + "你严重的接触到" + this + "!");
             this.applier.accept(p, level);
         }
     }

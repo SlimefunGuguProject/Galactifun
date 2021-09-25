@@ -24,36 +24,36 @@ public final class CoreItemGroup {
 
     /* cheat categories */
     public static final ItemGroup ASSEMBLY = new SubGroup(
-            "assembly", new CustomItemStack(Material.SMITHING_TABLE, "&fAssembly Table Recipes")
+            "assembly", new CustomItemStack(Material.SMITHING_TABLE, "&f星系配方")
     );
 
     /* normal categories */
     public static final ItemGroup EQUIPMENT = new SubGroup(
-            "equipment", new CustomItemStack(Material.IRON_HELMET, "&fEquipment")
+            "equipment", new CustomItemStack(Material.IRON_HELMET, "&f设备")
     );
     public static final ItemGroup ITEMS = new SubGroup(
-            "items", new CustomItemStack(GalactifunHead.ROCKET, "&fGalactifun")
+            "items", new CustomItemStack(GalactifunHead.ROCKET, "&f星系")
     );
     public static final ItemGroup COMPONENTS = new SubGroup(
-            "components", new CustomItemStack(Material.IRON_INGOT, "&fGalactifun Components")
+            "components", new CustomItemStack(Material.IRON_INGOT, "&f星系组件")
     );
     public static final ItemGroup MACHINES = new SubGroup(
-            "machines", new CustomItemStack(Material.REDSTONE_LAMP, "&fGalactifun Machines")
+            "machines", new CustomItemStack(Material.REDSTONE_LAMP, "&f星系机器")
     );
     public static final ItemGroup BLOCKS = new SubGroup(
-            "blocks", new CustomItemStack(Material.COBBLESTONE, "&fGalactifun Blocks")
+            "blocks", new CustomItemStack(Material.COBBLESTONE, "&f星系方块")
     );
 
     public static final AssemblyItemGroup ASSEMBLY_CATEGORY = new AssemblyItemGroup(
             Galactifun.createKey("assembly_flex"),
-            new CustomItemStack(Material.SMITHING_TABLE, "&fAssembly Table Recipes"));
+            new CustomItemStack(Material.SMITHING_TABLE, "&f星系配方"));
 
     public static void setup(Galactifun galactifun) {
         ItemGroup universe = new GalacticItemGroup(Galactifun.createKey("galactic_flex"),
-                new CustomItemStack(Material.END_STONE, "&bThe Universe"));
+                new CustomItemStack(Material.END_STONE, "&b宇宙"));
 
         new MultiGroup("main",
-                new CustomItemStack(Material.BEACON, "&bGalactifun"),
+                new CustomItemStack(Material.BEACON, "&b星系"),
                 EQUIPMENT, ITEMS, COMPONENTS, MACHINES, BLOCKS, universe, ASSEMBLY_CATEGORY
         ).register(galactifun);
     }
