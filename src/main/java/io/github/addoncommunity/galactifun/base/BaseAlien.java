@@ -19,13 +19,13 @@ import io.github.addoncommunity.galactifun.core.managers.AlienManager;
 @UtilityClass
 public final class BaseAlien {
 
-    public static final Firestorm FIRESTORM = new Firestorm("FIRESTORM", "Firestorm", 40, 50);
-    public static final MutantCreeper MUTANT_CREEPER = new MutantCreeper("MUTANT_CREEPER", "Mutant Creeper", 40, 40);
-    public static final Martian MARTIAN = new Martian("MARTIAN", "&4Martian", 32, 50);
-    public static final Leech LEECH = new Leech("LEECH", "&eLeech", 10, 1);
-    public static final Skywhale SKYWHALE = new Skywhale("SKYWHALE", "&fSkywhale", 100, 3);
-    public static final TitanAlien TITAN = new TitanAlien("TITAN", "Titan", 32, 40);
-    public static final TitanKing TITAN_KING = new TitanKing("TITAN_KING", "Titan King", 300, 1,
+    public static final Firestorm FIRESTORM = new Firestorm("FIRESTORM", "火爆者", 40, 50);
+    public static final MutantCreeper MUTANT_CREEPER = new MutantCreeper("MUTANT_CREEPER", "变异爬行者", 40, 40);
+    public static final Martian MARTIAN = new Martian("MARTIAN", "&4火星土著人", 32, 50);
+    public static final Leech LEECH = new Leech("LEECH", "&e水蛭", 10, 1);
+    public static final Skywhale SKYWHALE = new Skywhale("SKYWHALE", "&f飞鲸", 100, 3);
+    public static final TitanAlien TITAN = new TitanAlien("TITAN", "泰坦", 32, 40);
+    public static final TitanKing TITAN_KING = new TitanKing("TITAN_KING", "泰坦王", 300, 1,
             new BossBarStyle(BarColor.BLUE, BarStyle.SOLID, BarFlag.CREATE_FOG, BarFlag.DARKEN_SKY), LEECH);
 
     public static void setup(AlienManager alienManager) {

@@ -14,7 +14,7 @@ import io.github.mooy1.infinitylib.commands.SubCommand;
 public final class AlienSpawnCommand extends SubCommand {
 
     public AlienSpawnCommand() {
-        super("spawn", "Spawns an alien", true);
+        super("spawn", "出现火星土著人", true);
     }
 
     @Override

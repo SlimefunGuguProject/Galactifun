@@ -78,9 +78,9 @@ public final class Galactifun extends AbstractAddon {
         Scheduler.run(() -> log(Level.INFO,
                 "################# Galactifun " + getPluginVersion() + " #################",
                 "",
-                "Galactifun is open source, you can contribute or report bugs at: ",
+                "Galactifun是开源的，您可以在(英文): ",
                 getBugTrackerURL(),
-                "Join the Slimefun Addon Community Discord: discord.gg/SqD3gg5SAU",
+                "加入Slimefun插件社区: discord.gg/SqD3gg5SAU",
                 "",
                 "###################################################"
         ));

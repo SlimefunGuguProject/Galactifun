@@ -91,14 +91,14 @@ public final class Rocket extends SlimefunItem {
 
         String string = BlockStorage.getLocationInfo(b.getLocation(), "isLaunching");
         if (Boolean.parseBoolean(string)) {
-            p.sendMessage(ChatColor.RED + "The rocket is already launching!");
+            p.sendMessage(ChatColor.RED + "火箭正在发射!");
             return;
         }
 
         WorldManager worldManager = Galactifun.worldManager();
         PlanetaryWorld world = worldManager.getWorld(p.getWorld());
         if (world == null) {
-            p.sendMessage(ChatColor.RED + "You cannot travel to space from this world!");
+            p.sendMessage(ChatColor.RED + "你不能从这个世界到太空!");
             return;
         }
 
@@ -106,7 +106,7 @@ public final class Rocket extends SlimefunItem {
         if (string == null) return;
         int fuel = Integer.parseInt(string);
         if (fuel == 0) {
-            p.sendMessage(ChatColor.RED + "The rocket has no fuel!");
+            p.sendMessage(ChatColor.RED + "火箭没有燃料!");
             return;
         }
 
@@ -128,13 +128,13 @@ public final class Rocket extends SlimefunItem {
                 lore.add(Component.empty());
                 lore.add(Component.text()
                         .color(NamedTextColor.YELLOW)
-                        .append(Component.text("Distance: "))
+                        .append(Component.text("距离: "))
                         .append(Component.text((long) dist))
                         .build()
                 );
                 lore.add(Component.text()
                         .color(NamedTextColor.YELLOW)
-                        .append(Component.text("Fuel: "))
+                        .append(Component.text("燃料: "))
                         .append(Component.text((long) Math.ceil(dist / DISTANCE_PER_FUEL)))
                         .build()
                 );
@@ -144,11 +144,11 @@ public final class Rocket extends SlimefunItem {
         }, (player, pw) -> {
             player.closeInventory();
             int usedFuel = (int) Math.ceil((pw.distanceTo(world) * Util.KM_PER_LY) / DISTANCE_PER_FUEL);
-            player.sendMessage(ChatColor.YELLOW + "You are going to " + pw.name() + " and will use " +
-                    usedFuel + " fuel. Are you sure you want to do that? (yes/no)");
+            player.sendMessage(ChatColor.YELLOW + "你正在去 " + pw.name() + " 时会并将消耗" +
+                    usedFuel + "燃料.你确定要去吗? 输入(yes/no)");
             ChatUtils.awaitInput(player, (input) -> {
                 if (input.equalsIgnoreCase("yes")) {
-                    p.sendMessage(ChatColor.YELLOW + "Please enter destination coordinates in the form of <x> <z> (i.e. -123 456):");
+                    p.sendMessage(ChatColor.YELLOW + "请输入你要降落的地方 <x> <z> (例如 -123 456):");
                     ChatUtils.awaitInput(p, (response) -> {
                         String trimmed = response.trim();
                         if (Util.COORD_PATTERN.matcher(trimmed).matches()) {
@@ -157,7 +157,7 @@ public final class Rocket extends SlimefunItem {
                             int z = Integer.parseInt(split[1]);
                             launch(player, b, pw, fuel - usedFuel, fuelType, x, z);
                         } else {
-                            p.sendMessage(ChatColor.RED + "Invalid coordinate format! Please use the format <x> <z>");
+                            p.sendMessage(ChatColor.RED + "坐标格式无效！请使用该格式 <x> <z>");
                         }
                     });
                 }
@@ -199,7 +199,7 @@ public final class Rocket extends SlimefunItem {
         Scheduler.run(120, sendRandomMessage(p));
         Scheduler.run(160, sendRandomMessage(p));
         Scheduler.run(200, () -> {
-            p.sendMessage(ChatColor.GOLD + "Verifying blast awesomeness...");
+            p.sendMessage(ChatColor.GOLD + "你验证了爆炸威力...");
 
             Block destBlock = null;
             for (int y = to.getMaxHeight(); y > to.getMinHeight(); y--) {

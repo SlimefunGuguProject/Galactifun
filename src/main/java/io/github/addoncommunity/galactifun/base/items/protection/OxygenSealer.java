@@ -42,15 +42,15 @@ public final class OxygenSealer extends MenuBlock implements EnergyNetComponent,
     private static final String ENABLED = "enabled";
     private static final ItemStack ENABLED_ITEM = new CustomItemStack(
             Material.STRUCTURE_VOID,
-            "&aEnabled",
+            "&a启用",
             "",
-            "&7Click to disable"
+            "&7单击以关闭"
     );
     private static final ItemStack DISABLED_ITEM = new CustomItemStack(
             Material.BARRIER,
-            "&cDisabled",
+            "&c关闭",
             "",
-            "&7Click to enable"
+            "&7单击以启用"
     );
     private static int counter = 0;
     private final int range;
@@ -168,12 +168,12 @@ public final class OxygenSealer extends MenuBlock implements EnergyNetComponent,
         Location l = pos.toLocation();
         Block b = pos.getBlock();
         if (!BSUtils.getStoredBoolean(l, ENABLED)) {
-            updateHologram(b, "&cNot Enabled");
+            updateHologram(b, "&c未启用");
             return;
         }
 
         if (!BSUtils.getStoredBoolean(l, PROTECTING)) {
-            updateHologram(b, "&cNot Enough Energy");
+            updateHologram(b, "&c电量不足");
             return;
         }
 
@@ -188,7 +188,7 @@ public final class OxygenSealer extends MenuBlock implements EnergyNetComponent,
         Optional<Set<BlockPosition>> returned = Util.floodFill(l, range);
         // not sealed; continue on to the next block
         if (returned.isEmpty()) {
-            updateHologram(b, "&cArea Not Sealed or Too Big");
+            updateHologram(b, "&c区域未密封或太大");
             return;
         }
 
@@ -197,7 +197,7 @@ public final class OxygenSealer extends MenuBlock implements EnergyNetComponent,
             Galactifun.protectionManager().addOxygenBlock(bp);
         }
 
-        updateHologram(b, "&aOperational");
+        updateHologram(b, "&a可操作");
     }
 
 }

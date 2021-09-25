@@ -48,9 +48,9 @@ public final class BaseItems {
     public static final SlimefunItemStack OXYGEN_FILLER = new SlimefunItemStack(
             "OXYGEN_FILLER",
             new ItemStack(Material.QUARTZ_BLOCK),
-            "&fOxygen Filler",
+            "&f氧气填充器",
             "",
-            "&7Fills space suits with oxygen",
+            "&7让宇航服充满氧气",
             "",
             LoreBuilder.machine(MachineTier.AVERAGE, MachineType.MACHINE),
             LoreBuilder.powerPerSecond(100),
@@ -59,9 +59,9 @@ public final class BaseItems {
     public static final SlimefunItemStack SPACE_SUIT_UPGRADER = new SlimefunItemStack(
             "SPACE_SUIT_UPGRADER",
             new ItemStack(Material.IRON_BLOCK),
-            "&fSpace Suit Upgrader",
+            "&f航天服升级机",
             "",
-            "&7Adds upgrades to your space suit",
+            "&7为你的宇航服升级",
             "",
             LoreBuilder.machine(MachineTier.AVERAGE, MachineType.MACHINE),
             LoreBuilder.powerPerSecond(200),
@@ -70,54 +70,54 @@ public final class BaseItems {
     public static final SlimefunItemStack HEAT_RESISTANCE_UPGRADE = new SlimefunItemStack(
             "HEAT_RESISTANCE_UPGRADE",
             Material.IRON_BLOCK,
-            "&7Heat Resistance Upgrade",
+            "&7耐热性升级机",
             "",
-            "&8Add to your space suit to increase heat resistance"
+            "&8增强你的宇航服的耐热性"
     );
     public static final SlimefunItemStack COLD_RESISTANCE_UPGRADE = new SlimefunItemStack(
             "COLD_RESISTANCE_UPGRADE",
             Material.IRON_BLOCK,
-            "&7Cold Resistance Upgrade",
+            "&7抗寒性升级机",
             "",
-            "&8Add to your space suit to increase cold resistance"
+            "&8增强你的宇航服的抗寒性"
     );
     public static final SlimefunItemStack RADIATION_RESISTANCE_UPGRADE = new SlimefunItemStack(
             "RADIATION_RESISTANCE_UPGRADE",
             Material.IRON_BLOCK,
-            "&7Radiation Resistance Upgrade",
+            "&7抗辐射升级机",
             "",
-            "&8Add to your space suit to increase radiation resistance"
+            "&8增强你的宇航服的抗辐射"
     );
     public static final SlimefunItemStack SPACE_SUIT_HELMET = new SlimefunItemStack(
             "SPACE_SUIT_HELMET",
             Material.GLASS,
-            "&fSpace Suit Helmet",
+            "&f宇航服头盔",
             "",
-            "&7A basic space suit helmet",
-            LoreBuilder.RIGHT_CLICK_TO_USE
+            "&7基础宇航服头盔",
+            "&7右键使用"
     );
     public static final SlimefunItemStack SPACE_SUIT_CHEST = new SlimefunItemStack(
             "SPACE_SUIT_CHEST",
             Material.IRON_CHESTPLATE,
-            "&fSpace Suit Chest",
+            "&f宇航服胸甲",
             "",
-            "&7A basic space suit chest",
+            "&7基础宇航服胸甲",
             "",
             SpaceSuit.oxygenLore(0, 3600)
     );
     public static final SlimefunItemStack SPACE_SUIT_PANTS = new SlimefunItemStack(
             "SPACE_SUIT_PANTS",
             Material.IRON_LEGGINGS,
-            "&fSpace Suit Pants",
+            "&f宇航服护腿",
             "",
-            "&7Basic pair of space suit pants"
+            "&7基础宇航服护腿"
     );
     public static final SlimefunItemStack SPACE_SUIT_BOOTS = new SlimefunItemStack(
             "SPACE_SUIT_BOOTS",
             Material.IRON_BOOTS,
-            "&fSpace Suit Boots",
+            "&f宇航服靴子",
             "",
-            "&7Basic pair of space suit boots"
+            "&7基础宇航服靴子"
     );
     //</editor-fold>
 
@@ -125,26 +125,26 @@ public final class BaseItems {
     public static final SlimefunItemStack LAUNCH_PAD_CORE = new SlimefunItemStack(
             "LAUNCH_PAD_CORE",
             Material.STONE,
-            "&fLaunch Pad Core",
+            "&f发射台核心",
             "",
-            "&7Surround with 8 &fLaunch Pad Floor&7s",
-            "&7to use"
+            "&7需要用8个&f发射台地板&7包围发射台核心",
+            "&7来使用"
     );
 
     public static final SlimefunItemStack LAUNCH_PAD_FLOOR = new SlimefunItemStack(
             "LAUNCH_PAD_FLOOR",
             Material.STONE_SLAB,
-            "&fLaunch Pad Floor",
+            "&f发射台地板",
             "",
-            "&7Used in constructing the Launch Pad"
+            "&7用于建造发射台"
     );
 
     public static final SlimefunItemStack CIRCUIT_PRESS = new SlimefunItemStack(
             "CIRCUIT_PRESS",
             Material.PISTON,
-            "&fCircuit Press",
+            "&f循环压力机",
             "",
-            "&7Creates circuits",
+            "&7建造各种物品",
             LoreBuilder.machine(MachineTier.ADVANCED, MachineType.MACHINE),
             LoreBuilder.powerBuffer(512),
             LoreBuilder.powerPerSecond(256)
@@ -152,51 +152,50 @@ public final class BaseItems {
     public static final SlimefunItemStack ASSEMBLY_TABLE = new SlimefunItemStack(
             "ASSEMBLY_TABLE",
             Material.SMITHING_TABLE,
-            "&fAssembly Table",
+            "&f星系装配台",
             "",
-            "&7Used to construct many things",
+            "&7建造各种物品",
             "",
             LoreBuilder.machine(MachineTier.END_GAME, MachineType.MACHINE),
-            LoreBuilder.power(2048, "/Craft")
+            LoreBuilder.power(2048, " 每个")
     );
     public static final SlimefunItemStack STARGATE_RING = new SlimefunItemStack(
             "STARGATE_RING",
             Material.QUARTZ_BLOCK,
-            "&9Stargate Ring",
+            "&9星门环",
             "",
-            "&7Used to construct a stargate"
+            "&7用于建造星门"
     );
     public static final SlimefunItemStack STARGATE_CONTROLLER = new SlimefunItemStack(
             "STARGATE_CONTROLLER",
             Material.CHISELED_QUARTZ_BLOCK,
-            "&9Stargate Controller",
+            "&9星门控制器",
             "",
-            "&7Used to control a stargate"
+            "&7用于控制星门"
     );
     public static final SlimefunItemStack OBSERVATORY = new SlimefunItemStack(
             "OBSERVATORY",
             Material.GLASS,
-            "&fObservatory",
+            "&f星系天文台",
             "",
-            "&7Allows you to discover basic info about",
-            "&7a world remotely. Only works on worlds",
-            "&7closer than 0.25 ly (2,365,200,000,000 km)"
+            "&7允许您远程发现有关星球的基本信息",
+            "&7仅适用于距离小于0.25光年",
+            "&7(236520000000公里)的星球"
     );
     public static final SlimefunItemStack PLANETARY_ANALYZER = new SlimefunItemStack(
             "PLANETARY_ANALYZER",
             Material.SEA_LANTERN,
-            "&fPlanetary Analyzer",
+            "&f行星分析仪",
             "",
-            "&7Allows you to discover advanced info",
-            "&7about the current planet"
+            "&7允许您发现有关当前行星的高级信息"
     );
     public static final SlimefunItemStack DIAMOND_ANVIL = new SlimefunItemStack(
             "DIAMOND_ANVIL",
             Material.ANVIL,
-            "&fDiamond Anvil",
+            "&f钻石砧",
             "",
-            "&7Compresses material so hard",
-            "&7it becomes something else entirely",
+            "&7材料的密度压缩更加的微小",
+            "&7让他完全变成其他物品",
             LoreBuilder.machine(MachineTier.END_GAME, MachineType.MACHINE),
             LoreBuilder.powerPerSecond(1024),
             LoreBuilder.powerBuffer(2048)
@@ -204,11 +203,10 @@ public final class BaseItems {
     public static final SlimefunItemStack FUSION_REACTOR = new SlimefunItemStack(
             "FUSION_REACTOR",
             HeadTexture.NUCLEAR_REACTOR.getAsItemStack(),
-            "&fFusion Reactor",
+            "&f聚变反应堆",
             "",
-            "&7Uses lasers to fuse Helium-3 pellets",
-            "&7and generate a whale a lot of energy",
-            "&7in the process",
+            "&7使用激光将氦-3颗粒熔合",
+            "&7并在熔合过程中产生大量能量",
             "",
             LoreBuilder.powerPerSecond(65_536),
             LoreBuilder.powerBuffer(65_536)
@@ -218,124 +216,122 @@ public final class BaseItems {
     public static final SlimefunItemStack COOLING_UNIT_1 = new SlimefunItemStack(
             "COOLING_UNIT_1",
             HeadTexture.COOLING_UNIT.getTexture(),
-            "&bCooling Unit I",
+            "&b空间冷却器 I",
             "",
-            "&7Effect: Heat",
-            "&7Protection: 2",
-            "&7Range: 1000 blocks",
+            "&7效果级: 热",
+            "&7保护级: 2",
+            "&7范围: 1000个方块",
             LoreBuilder.powerPerSecond(1024),
             LoreBuilder.powerBuffer(2048)
     );
     public static final SlimefunItemStack COOLING_UNIT_2 = new SlimefunItemStack(
             "COOLING_UNIT_2",
             HeadTexture.COOLING_UNIT.getTexture(),
-            "&bCooling Unit II",
+            "&b空间冷却器 II",
             "",
-            "&7Effect: Heat",
-            "&7Protection: 4",
-            "&7Range: 1500 blocks",
+            "&7效果级: 热",
+            "&7保护级: 4",
+            "&7范围: 1500个方块",
             LoreBuilder.powerPerSecond(2048),
             LoreBuilder.powerBuffer(4096)
     );
     public static final SlimefunItemStack COOLING_UNIT_3 = new SlimefunItemStack(
             "COOLING_UNIT_3",
             HeadTexture.COOLING_UNIT.getTexture(),
-            "&bCooling Unit III",
+            "&b空间冷却器 III",
             "",
-            "&7Effect: Heat",
-            "&7Protection: 6",
-            "&7Range: 2000 blocks",
+            "&7效果级: 热",
+            "&7保护级: 6",
+            "&7范围: 2000个方块",
             LoreBuilder.powerPerSecond(3072),
             LoreBuilder.powerBuffer(6144)
     );
     public static final SlimefunItemStack SPACE_HEATER_1 = new SlimefunItemStack(
             "SPACE_HEATER_1",
             Material.SHROOMLIGHT,
-            "&6Space Heater I",
+            "&6空间加热器 I",
             "",
-            "&7Effect: Cold",
-            "&7Protection: 2",
-            "&7Range: 1000 blocks",
+            "&7效果级: 冷",
+            "&7保护级: 2",
+            "&7范围: 1000个方块",
             LoreBuilder.powerPerSecond(512),
             LoreBuilder.powerBuffer(1024)
     );
     public static final SlimefunItemStack SPACE_HEATER_2 = new SlimefunItemStack(
             "SPACE_HEATER_2",
             Material.SHROOMLIGHT,
-            "&6Space Heater II",
+            "&6空间加热器 II",
             "",
-            "&7Effect: Cold",
-            "&7Protection: 4",
-            "&7Range: 1500 blocks",
+            "&7效果级: 冷",
+            "&7保护级: 4",
+            "&7范围: 1500个方块",
             LoreBuilder.powerPerSecond(1024),
             LoreBuilder.powerBuffer(2048)
     );
     public static final SlimefunItemStack SPACE_HEATER_3 = new SlimefunItemStack(
             "SPACE_HEATER_3",
             Material.SHROOMLIGHT,
-            "&6Space Heater III",
+            "&6空间加热器 III",
             "",
-            "&7Effect: Cold",
-            "&7Protection: 6",
-            "&7Range: 2000 blocks",
+            "&7效果级: 冷",
+            "&7保护级: 6",
+            "&7范围: 2000个方块",
             LoreBuilder.powerPerSecond(2048),
             LoreBuilder.powerBuffer(4096)
     );
     public static final SlimefunItemStack ION_DISPERSER_1 = new SlimefunItemStack(
             "ION_DISPERSER_1",
             Material.PRISMARINE,
-            "&fIon Disperser I",
+            "&f离子分散器 I",
             "",
-            "&7Effect: Radiation",
-            "&7Protection: 2",
-            "&7Range: 1000 blocks",
+            "&7效果级: 辐射",
+            "&7保护级: 2",
+            "&7范围: 1000个方块",
             LoreBuilder.powerPerSecond(512),
             LoreBuilder.powerBuffer(1024)
     );
     public static final SlimefunItemStack ION_DISPERSER_2 = new SlimefunItemStack(
             "ION_DISPERSER_2",
             Material.PRISMARINE,
-            "&fIon Disperser II",
+            "&f离子分散器 II",
             "",
-            "&7Effect: Radiation",
-            "&7Protection: 4",
-            "&7Range: 1500 blocks",
+            "&7效果级: Radiation",
+            "&7保护级: 4",
+            "&7范围: 1500个方块",
             LoreBuilder.powerPerSecond(1024),
             LoreBuilder.powerBuffer(2048)
     );
     public static final SlimefunItemStack OXYGEN_SEALER = new SlimefunItemStack(
             "OXYGEN_SEALER",
             Material.FURNACE,
-            "&fOxygen Sealer",
+            "&f氧气散播机",
             "",
-            "&7Fills a sealed area with oxygen. Range 1000 blocks"
+            "&7用氧气填充密封区域",
+            "范围: 1000个方块"
     );
     public static final SlimefunItemStack LANDING_HATCH = new SlimefunItemStack(
             "LANDING_HATCH",
             Material.IRON_TRAPDOOR,
-            "&fLanding Hatch",
+            "&f起落舱",
             "",
-            "&7Rockets ignore this block when",
-            "&7landing; they'll land on the",
-            "&7highest block below it. It is",
-            "&7considered impassable by air",
-            "&7so it can be used to seal spaces"
+            "&7火箭降落时会在下方的最高位置中",
+            "&7里面为密封空间,可以填充氧气"
     );
     public static final SlimefunItemStack SUPER_FAN = new SlimefunItemStack(
             "SUPER_FAN",
             Material.WHITE_WOOL,
-            "&7Super Fan",
+            "&7加强鼓风机",
             "",
-            "&7Place this next to a block that needs",
-            "&7a sealed area to extend the range by 15%"
+            "&7将其放置在需要密封区域",
+            "&7影响范围会扩大15%"
     );
     public static final SlimefunItemStack AUTOMATIC_DOOR = new SlimefunItemStack(
             "AUTOMATIC_DOOR",
             Material.OBSERVER,
-            "&fAutomatic Door",
+            "&f自动门",
             "",
-            "&7Automatically places/removes the blocks inside",
-            "&7when you go to/away from it"
+            "&7当您离开/进入时",
+            "&7将会自动打开/关闭"
     );
     //</editor-fold>
     //<editor-fold desc="Rock It" defaultstate="collapsed">
@@ -344,30 +340,30 @@ public final class BaseItems {
     public static final SlimefunItemStack TIER_ONE = new SlimefunItemStack(
             "ROCKET_TIER_ONE",
             GalactifunHead.ROCKET,
-            "&4Rocket Tier 1",
+            "&4一阶火箭",
             "",
-            "&7Fuel Capacity: " + TIER_ONE_FUEL,
-            "&7Cargo Capacity: " + TIER_ONE_STORAGE
+            "&7燃料容量: " + TIER_ONE_FUEL,
+            "&7可载重量: " + TIER_ONE_STORAGE
     );
     private static final int TIER_TWO_FUEL = 100;
     private static final int TIER_TWO_STORAGE = 18;
     public static final SlimefunItemStack TIER_TWO = new SlimefunItemStack(
             "ROCKET_TIER_TWO",
             GalactifunHead.ROCKET,
-            "&4Rocket Tier 2",
+            "&4二阶火箭",
             "",
-            "&7Fuel Capacity: " + TIER_TWO_FUEL,
-            "&7Cargo Capacity: " + TIER_TWO_STORAGE
+            "&7燃料容量: " + TIER_TWO_FUEL,
+            "&7可载重量: " + TIER_TWO_STORAGE
     );
     private static final int TIER_THREE_FUEL = 500;
     private static final int TIER_THREE_STORAGE = 36;
     public static final SlimefunItemStack TIER_THREE = new SlimefunItemStack(
             "ROCKET_TIER_THREE",
             GalactifunHead.ROCKET,
-            "&4Rocket Tier 3",
+            "&4三阶火箭",
             "",
-            "&7Fuel Capacity: " + TIER_THREE_FUEL,
-            "&7Cargo Capacity: " + TIER_THREE_STORAGE
+            "&7燃料容量: " + TIER_THREE_FUEL,
+            "&7可载重量: " + TIER_THREE_STORAGE
     );
     //</editor-fold>
 

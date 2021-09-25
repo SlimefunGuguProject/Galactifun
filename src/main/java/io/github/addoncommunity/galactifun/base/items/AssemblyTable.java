@@ -41,7 +41,7 @@ public final class AssemblyTable extends CraftingBlock implements EnergyNetCompo
     private static final int RECIPE_SLOT = 7;
     public static final MachineRecipeType TYPE = new MachineRecipeType("assembly_table",
             new CustomItemStack(BaseItems.ASSEMBLY_TABLE, BaseItems.ASSEMBLY_TABLE.getDisplayName(),
-                    "", "&cUse the assemby recipes category to see the correct recipe!"));
+                    "&c此配方在这显示的是错误的配方", "&c请在星际配方内查看正确的配方!"));
 
     private final int energy;
 
@@ -67,7 +67,7 @@ public final class AssemblyTable extends CraftingBlock implements EnergyNetCompo
     @Override
     protected void setup(BlockMenuPreset preset) {
         super.setup(preset);
-        preset.addItem(RECIPE_SLOT, new CustomItemStack(Material.BOOK, "&6Recipes"), ChestMenuUtils.getEmptyClickHandler());
+        preset.addItem(RECIPE_SLOT, new CustomItemStack(Material.BOOK, "&6星际配方"), ChestMenuUtils.getEmptyClickHandler());
     }
 
     @Override
@@ -88,8 +88,8 @@ public final class AssemblyTable extends CraftingBlock implements EnergyNetCompo
         int charge = getCharge(menu.getLocation());
         if (charge < this.energy) {
             p.sendMessage(
-                    ChatColor.RED + "Not enough energy!\n" +
-                    ChatColor.GREEN + "Charge: " + ChatColor.RED + charge + ChatColor.GREEN + "/" + this.energy + " J"
+                    ChatColor.RED + "电量不足!\n" +
+                    ChatColor.GREEN + "所需电量: " + ChatColor.RED + charge + ChatColor.GREEN + "/" + this.energy + " J"
             );
         }
         else {
