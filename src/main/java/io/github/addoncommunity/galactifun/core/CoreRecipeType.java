@@ -15,7 +15,7 @@ public final class CoreRecipeType {
     public static final RecipeType ALIEN_DROP = new RecipeType(Galactifun.createKey("alien_drop"), RecipeType.MOB_DROP.toItem());
     public static final RecipeType WORLD_GEN = new RecipeType(Galactifun.createKey("world_gen"), new CustomItemStack(
             Material.END_STONE,
-            "&f自然生产",
+            "&f自然生成",
             "",
             "&7在外星来获取此物品"
     ));
