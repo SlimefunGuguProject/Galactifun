@@ -187,17 +187,7 @@ public final class WorldManager implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    private void onPlayerTeleport(@Nonnull PlayerTeleportEvent e) {
-        if (!e.getPlayer().hasPermission("galactifun.admin")) {
-            if (e.getTo().getWorld() != null) {
-                AlienWorld world = getAlienWorld(e.getTo().getWorld());
-                if (world != null) {
-                    e.setCancelled(true);
-                }
-            }
-        }
-    }
+    
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void onCreatureSpawn(@Nonnull CreatureSpawnEvent e) {
