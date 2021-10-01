@@ -234,7 +234,7 @@ public final class Rocket extends SlimefunItem {
                     if (entity.getLocation().distanceSquared(rocket.getLocation()) <= 25) {
 
                         entity.setMetadata("canTpToOtherAlienWorld", new FixedMetadataValue(Galactifun.instance(), true));
-                        entity.teleport(destBlock.getLocation().add(0, 1, 0));
+                        PaperLib.teleportAsync(entity, destBlock.getLocation().add(0, 1, 0));
 
                         if (KnowledgeLevel.get(p, worldTo) == KnowledgeLevel.NONE) {
                             KnowledgeLevel.BASIC.set(p, worldTo);

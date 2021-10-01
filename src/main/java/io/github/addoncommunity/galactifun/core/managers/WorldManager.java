@@ -197,8 +197,9 @@ public final class WorldManager implements Listener {
             if (e.getTo().getWorld() != null) {
                 AlienWorld world = getAlienWorld(e.getTo().getWorld());
                 if (world != null) {
-                    if (canTpToOtherAlienWorld(e.getPlayer()))
+                    if (!canTpToOtherAlienWorld(e.getPlayer()))
                         e.setCancelled(true);
+                    else
                         e.getPlayer().removeMetadata("canTpToOtherAlienWorld", Galactifun.instance());
                 }
             }
