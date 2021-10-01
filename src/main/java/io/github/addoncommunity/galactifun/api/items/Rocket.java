@@ -26,6 +26,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import io.github.addoncommunity.galactifun.Galactifun;
@@ -199,7 +201,7 @@ public final class Rocket extends SlimefunItem {
         Scheduler.run(160, sendRandomMessage(p));
         Scheduler.run(200, () -> {
             p.sendMessage(ChatColor.GOLD + "你验证了爆炸威力...");
-
+            p.setMetadata("canTpToOtherAlienWorld", new FixedMetadataValue(Galactifun.instance(), true));
             Block destBlock = null;
             for (int y = to.getMaxHeight(); y > to.getMinHeight(); y--) {
                 Block b = to.getBlockAt(x, y, z);

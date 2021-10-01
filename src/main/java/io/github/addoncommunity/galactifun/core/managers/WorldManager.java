@@ -6,7 +6,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -62,6 +64,8 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.items.ItemUtils;
 import io.github.thebusybiscuit.slimefun4.libraries.paperlib.PaperLib;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
+
+import org.bukkit.metadata.MetadataValue;
 
 public final class WorldManager implements Listener {
 
@@ -193,10 +197,22 @@ public final class WorldManager implements Listener {
             if (e.getTo().getWorld() != null) {
                 AlienWorld world = getAlienWorld(e.getTo().getWorld());
                 if (world != null) {
-                    e.setCancelled(true);
+                    if (canTpToOtherAlienWorld(e.getPlayer()))
+                        e.setCancelled(true);
+                        e.getPlayer().removeMetadata("canTpToOtherAlienWorld", Galactifun.instance());
                 }
             }
         }
+    }
+
+    private Boolean canTpToOtherAlienWorld(Player p){
+        List<MetadataValue> values = p.getMetadata("canTpToOtherAlienWorld");
+        for (MetadataValue value : values){
+            if (Objects.equals(value.getOwningPlugin(), Galactifun.instance())){
+                return value.asBoolean();
+            }
+        }
+        return false;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
