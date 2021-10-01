@@ -201,7 +201,7 @@ public final class Rocket extends SlimefunItem {
         Scheduler.run(160, sendRandomMessage(p));
         Scheduler.run(200, () -> {
             p.sendMessage(ChatColor.GOLD + "你验证了爆炸威力...");
-            p.setMetadata("canTpToOtherAlienWorld", new FixedMetadataValue(Galactifun.instance(), true));
+
             Block destBlock = null;
             for (int y = to.getMaxHeight(); y > to.getMinHeight(); y--) {
                 Block b = to.getBlockAt(x, y, z);
@@ -233,7 +233,8 @@ public final class Rocket extends SlimefunItem {
                 if ((entity instanceof LivingEntity && !(entity instanceof ArmorStand)) || entity instanceof Item) {
                     if (entity.getLocation().distanceSquared(rocket.getLocation()) <= 25) {
 
-                        PaperLib.teleportAsync(entity, destBlock.getLocation().add(0, 1, 0));
+                        entity.setMetadata("canTpToOtherAlienWorld", new FixedMetadataValue(Galactifun.instance(), true));
+                        entity.teleportAsync(destBlock.getLocation().add(0, 1, 0));
 
                         if (KnowledgeLevel.get(p, worldTo) == KnowledgeLevel.NONE) {
                             KnowledgeLevel.BASIC.set(p, worldTo);
