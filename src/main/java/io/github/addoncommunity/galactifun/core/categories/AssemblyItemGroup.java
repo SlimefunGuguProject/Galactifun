@@ -97,7 +97,7 @@ public final class AssemblyItemGroup extends FlexItemGroup {
             return false;
         });
 
-        for (int i = 0; i < item.getValue().length; i++) {
+        for (int i = 0; i < item.getValue().length-1; i++) {
             ItemStack stack = item.getValue()[i];
             if (stack != null) {
                 menu.addItem(SLOTS[i], stack, (p1, slot, item1, action) -> {
