@@ -59,7 +59,7 @@ public final class BaseItems {
     public static final SlimefunItemStack SPACE_SUIT_UPGRADER = new SlimefunItemStack(
             "SPACE_SUIT_UPGRADER",
             new ItemStack(Material.IRON_BLOCK),
-            "&f航天服升级机",
+            "&f航天服升级模块",
             "",
             "&7为你的宇航服升级",
             "",
@@ -70,14 +70,14 @@ public final class BaseItems {
     public static final SlimefunItemStack HEAT_RESISTANCE_UPGRADE = new SlimefunItemStack(
             "HEAT_RESISTANCE_UPGRADE",
             Material.IRON_BLOCK,
-            "&7耐热性升级机",
+            "&7耐热性升级模块",
             "",
             "&8增强你的宇航服的耐热性"
     );
     public static final SlimefunItemStack COLD_RESISTANCE_UPGRADE = new SlimefunItemStack(
             "COLD_RESISTANCE_UPGRADE",
             Material.IRON_BLOCK,
-            "&7抗寒性升级机",
+            "&7抗寒性升级模块",
             "",
             "&8增强你的宇航服的抗寒性"
     );
@@ -94,7 +94,7 @@ public final class BaseItems {
             "&f宇航服头盔",
             "",
             "&7基础宇航服头盔",
-            "&7右键使用"
+            "&7右键&e使用"
     );
     public static final SlimefunItemStack SPACE_SUIT_CHEST = new SlimefunItemStack(
             "SPACE_SUIT_CHEST",
