@@ -13,6 +13,7 @@ import io.github.addoncommunity.galactifun.api.worlds.AlienWorld;
 import io.github.addoncommunity.galactifun.base.items.AssemblyTable;
 import io.github.addoncommunity.galactifun.base.items.CircuitPress;
 import io.github.addoncommunity.galactifun.base.items.DiamondAnvil;
+import io.github.addoncommunity.galactifun.base.items.MoonCheese;
 import io.github.addoncommunity.galactifun.core.CoreItemGroup;
 import io.github.addoncommunity.galactifun.core.CoreRecipeType;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -37,10 +38,20 @@ public final class BaseMats {
             Material.LIGHT_GRAY_CONCRETE_POWDER,
             "&7月球尘埃"
     );
+    public static final SlimefunItemStack MOON_ROCK = new SlimefunItemStack(
+            "MOON_ROCK",
+            Material.ANDESITE,
+            "&7Moon Rock"
+    );
     public static final SlimefunItemStack MARS_DUST = new SlimefunItemStack(
             "MARS_DUST",
             Material.RED_SAND,
             "&c火星尘埃"
+    );
+    public static final SlimefunItemStack MARS_ROCK = new SlimefunItemStack(
+            "MARS_ROCK",
+            Material.TERRACOTTA,
+            "&cMars Rock"
     );
     public static final SlimefunItemStack DRY_ICE = new SlimefunItemStack(
             "DRY_ICE",
@@ -158,6 +169,11 @@ public final class BaseMats {
             Material.FLINT_AND_STEEL,
             "&f三阶火箭发动机"
     );
+    public static final SlimefunItemStack ION_ENGINE = new SlimefunItemStack(
+            "ION_ENGINE",
+            Material.FLINT_AND_STEEL,
+            "&bIon Engine"
+    );
     public static final SlimefunItemStack ADVANCED_PROCESSING_UNIT = new SlimefunItemStack(
             "ADVANCED_PROCESSING_UNIT",
             GalactifunHead.CORE,
@@ -218,6 +234,13 @@ public final class BaseMats {
             "&4陨星",
             "",
             "&7这些流星含有钨"
+    );
+    public static final SlimefunItemStack MOON_CHEESE = new SlimefunItemStack(
+            "MOON_CHEESE",
+            GalactifunHead.CHEESE,
+            "&6Moon Cheese",
+            "",
+            "&7Ew"
     );
     public static final SlimefunItemStack ENDER_BLOCK = new SlimefunItemStack(
             "ENDER_BLOCK",
@@ -280,7 +303,9 @@ public final class BaseMats {
 
     public static void setup() {
         worldItem(MOON_DUST, BaseUniverse.THE_MOON);
+        worldItem(MOON_ROCK, BaseUniverse.THE_MOON);
         worldItem(MARS_DUST, BaseUniverse.MARS);
+        worldItem(MARS_ROCK, BaseUniverse.MARS);
         worldItem(FALLEN_METEOR, BaseUniverse.MARS);
         worldItem(DRY_ICE, BaseUniverse.MARS, BaseUniverse.TITAN);
         worldItem(SULFUR_BLOCK, BaseUniverse.VENUS, BaseUniverse.IO);
@@ -294,7 +319,7 @@ public final class BaseMats {
         component(TUNGSTEN_INGOT, RecipeType.SMELTERY, FALLEN_METEOR);
         component(ALUMINUM_COMPOSITE_SHEET, RecipeType.COMPRESSOR, new SlimefunItemStack(ALUMINUM_COMPOSITE, 8));
         component(HEAVY_DUTY_SHEET, RecipeType.COMPRESSOR, new SlimefunItemStack(ALUMINUM_COMPOSITE_SHEET, 8));
-        component(SPACE_GRADE_PLATE, RecipeType.COMPRESSOR, HEAVY_DUTY_SHEET, TUNGSTEN_CARBIDE);
+        component(SPACE_GRADE_PLATE, RecipeType.PRESSURE_CHAMBER, HEAVY_DUTY_SHEET, TUNGSTEN_CARBIDE);
         component(ULTRA_DUTY_SHEET, RecipeType.COMPRESSOR, new SlimefunItemStack(SPACE_GRADE_PLATE, 4));
         component(GOLD_FOIL, RecipeType.COMPRESSOR, 4, SlimefunItems.GOLD_24K_BLOCK);
         component(REINFORCED_CHANNEL, RecipeType.ENHANCED_CRAFTING_TABLE, 8,
@@ -356,6 +381,14 @@ public final class BaseMats {
                 SPACE_GRADE_PLATE, null, null, null, null, SPACE_GRADE_PLATE,
                 SPACE_GRADE_PLATE, null, null, null, null, SPACE_GRADE_PLATE
         );
+        assembly(ION_ENGINE, true,
+                SlimefunItems.SOLAR_GENERATOR_4, REINFORCED_CHANNEL, REINFORCED_CHANNEL, REINFORCED_CHANNEL, REINFORCED_CHANNEL, SlimefunItems.SOLAR_GENERATOR_4,
+                null, null, REINFORCED_CHANNEL, REINFORCED_CHANNEL, null, null,
+                null, DIAMOND_CIRCUIT, NOZZLE, NOZZLE, DIAMOND_CIRCUIT, null,
+                null, SPACE_GRADE_PLATE, BLISTERING_VOLCANIC_INGOT, BLISTERING_VOLCANIC_INGOT, SPACE_GRADE_PLATE, null,
+                SPACE_GRADE_PLATE, null, null, null, null, SPACE_GRADE_PLATE,
+                SPACE_GRADE_PLATE, ALUMINUM_COMPOSITE, null, null, ALUMINUM_COMPOSITE, SPACE_GRADE_PLATE
+                );
         component(ADVANCED_PROCESSING_UNIT, RecipeType.ENHANCED_CRAFTING_TABLE,
                 REDSTONE_CIRCUIT, GLOWSTONE_CIRCUIT, REDSTONE_CIRCUIT,
                 DIAMOND_CIRCUIT, SlimefunItems.ADVANCED_CIRCUIT_BOARD, DIAMOND_CIRCUIT,
@@ -416,6 +449,12 @@ public final class BaseMats {
         component(LASERITE_DUST, true, RecipeType.ORE_CRUSHER, LASERITE_ORE);
         component(LASERITE, DiamondAnvil.TYPE, new SlimefunItemStack(LASERITE_DUST, 12));
 
+        new MoonCheese(CoreItemGroup.ITEMS, MOON_CHEESE, CoreRecipeType.WORLD_GEN, new ItemStack[]{
+                BaseUniverse.THE_MOON.item()
+        }).register(Galactifun.instance());
+
+        BaseUniverse.THE_MOON.addBlockMapping(Material.GOLD_ORE, MOON_CHEESE);
+
         // SlimefunWarfare integration
         SlimefunItem diode = SlimefunItem.getById("LASER_DIODE");
         if (diode != null) {
@@ -425,6 +464,14 @@ public final class BaseMats {
         RecipeType.GRIND_STONE.register(
                 Arrays.copyOf(new ItemStack[] { SULFUR_BLOCK }, 9),
                 new SlimefunItemStack(SlimefunItems.SULFATE, 9)
+        );
+        RecipeType.GRIND_STONE.register(
+                Arrays.copyOf(new ItemStack[] { MARS_ROCK }, 9),
+                new SlimefunItemStack(MARS_DUST, 4)
+        );
+        RecipeType.GRIND_STONE.register(
+                Arrays.copyOf(new ItemStack[] { MOON_ROCK }, 9),
+                new SlimefunItemStack(MOON_DUST, 4)
         );
     }
 

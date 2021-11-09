@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.apache.commons.lang.Validate;
 import org.bukkit.Chunk;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -21,6 +20,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.block.Block;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
@@ -40,6 +40,8 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.data.persistent.PersistentDataAPI;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
+
+import org.apache.commons.lang.Validate;
 
 /**
  * Any alien world
@@ -72,7 +74,7 @@ public abstract class AlienWorld extends PlanetaryWorld {
             return null;
         }
 
-        Galactifun.instance().log(Level.INFO, "Loading planet " + name());
+        Galactifun.log(Level.INFO, "Loading planet " + name());
 
         String worldName = "world_galactifun_" + this.id;
 
@@ -164,7 +166,7 @@ public abstract class AlienWorld extends PlanetaryWorld {
     }
 
     /**
-     * Override and set to false if your world is not required/needed for your plugin to work.
+     * Override and set to false if your world is unimportant
      */
     protected boolean enabledByDefault() {
         return true;
@@ -210,12 +212,19 @@ public abstract class AlienWorld extends PlanetaryWorld {
             Collections.shuffle(this.species, rand);
 
             int players = world.getPlayers().size();
-            int mobs = world.getLivingEntities().size() - players;
+            int mobs = 0;
+            for (LivingEntity e : world.getLivingEntities()) {
+                if (Galactifun.alienManager().getAlien(e) != null) {
+                    mobs++;
+                }
+            }
             int max = players * Galactifun.worldManager().maxAliensPerPlayer();
 
-            for (Alien<?> alien : this.species) {
-                if ((mobs += alien.attemptSpawn(rand, world)) > max) {
-                    break;
+            if (mobs < max) {
+                for (Alien<?> alien : this.species) {
+                    if ((mobs += alien.attemptSpawn(rand, world)) > max) {
+                        break;
+                    }
                 }
             }
         }

@@ -41,7 +41,7 @@ public final class AssemblyTable extends CraftingBlock implements EnergyNetCompo
     private static final int RECIPE_SLOT = 7;
     public static final MachineRecipeType TYPE = new MachineRecipeType("assembly_table",
             new CustomItemStack(BaseItems.ASSEMBLY_TABLE, BaseItems.ASSEMBLY_TABLE.getDisplayName(),
-                    "&c此配方在这显示的是错误的配方", "&c请在星际配方内查看正确的配方!"));
+                  "",  "&c此配方在这显示的是错误的配方", "&c请在星际配方内查看正确的配方!"));
 
     private final int energy;
 
