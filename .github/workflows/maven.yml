@@ -34,5 +34,5 @@ jobs:
         if: success()
         with:
           name: Galactifun zh-CN
-          path: target/Galactifun v12 zh-CN.jar
+          path: target/Galactifun v21119 zh-CN.jar
 # 注意要和打包出来的一致 Actions..

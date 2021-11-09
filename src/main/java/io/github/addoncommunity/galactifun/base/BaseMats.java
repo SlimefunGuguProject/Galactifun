@@ -41,7 +41,7 @@ public final class BaseMats {
     public static final SlimefunItemStack MOON_ROCK = new SlimefunItemStack(
             "MOON_ROCK",
             Material.ANDESITE,
-            "&7Moon Rock"
+            "&7月岩"
     );
     public static final SlimefunItemStack MARS_DUST = new SlimefunItemStack(
             "MARS_DUST",
@@ -51,7 +51,7 @@ public final class BaseMats {
     public static final SlimefunItemStack MARS_ROCK = new SlimefunItemStack(
             "MARS_ROCK",
             Material.TERRACOTTA,
-            "&cMars Rock"
+            "&c火星岩"
     );
     public static final SlimefunItemStack DRY_ICE = new SlimefunItemStack(
             "DRY_ICE",

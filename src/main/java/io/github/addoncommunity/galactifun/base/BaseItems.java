@@ -218,31 +218,29 @@ public final class BaseItems {
     public static final SlimefunItemStack ATMOSPHERIC_HARVESTER = new SlimefunItemStack(
             "ATMOSPHERIC_HARVESTER",
             GalactifunHead.ATMOSPHERIC_HARVESTER,
-            "&fAtmospheric Harvester",
+            "&f大气收集机",
             "",
-            "&7Collects gases from the atmosphere",
+            "&7收集大气中的气体",
             LoreBuilder.powerPerSecond(64),
             LoreBuilder.powerBuffer(128),
             "",
-            "&f&oTexture by haseir"
+            "&f&o材质作者:haseir"
     );
     public static final SlimefunItemStack CHEMICAL_REACTOR = new SlimefunItemStack(
             "CHEMICAL_REACTOR",
             Material.SEA_LANTERN,
-            "&fChemical Reactor",
+            "&f化学反应器",
             "",
-            "&7Reacts chemicals together",
-            "&7to create new ones",
+            "&7化学反应产生新的化学物质",
             LoreBuilder.powerPerSecond(256),
             LoreBuilder.powerBuffer(512)
     );
     public static final SlimefunItemStack ELECTROLYZER = new SlimefunItemStack(
             "ELECTROLYZER",
             Material.LANTERN,
-            "&fElectrolyzer",
+            "&f电解器",
             "",
-            "&7Uses electricity to split",
-            "&7chemicals into their constituents",
+            "&7用电把化学物质分解成别的成分",
             LoreBuilder.powerPerSecond(256),
             LoreBuilder.powerBuffer(512)
     );
