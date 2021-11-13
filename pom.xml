@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.addoncommunity.galactifun</groupId>
     <artifactId>Galactifun</artifactId>
-    <version>21119 zh-CN</version>
+    <version>211113 zh-CN</version>
 
     <properties>
         <maven.compiler.source>16</maven.compiler.source>

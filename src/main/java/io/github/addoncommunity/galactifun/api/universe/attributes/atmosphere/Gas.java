@@ -57,9 +57,9 @@ public enum Gas {
         this.item = new SlimefunItemStack(
                 "ATMOSPHERIC_GAS_" + this.name(),
                 SlimefunUtils.getCustomHead(texture),
-                "&f" + ChatUtils.humanize(this.name()) + " Gas Canister",
+                "&f来自" + ChatUtils.humanize(this.name()) + "气体",
                 "",
-                "&f&oTexture by Sefiraat"
+                "&f&o材质作者: Sefiraat"
         );
 
         new SlimefunItem(CoreItemGroup.ITEMS, this.item, RecipeType.NULL, new ItemStack[9]).register(Galactifun.instance());

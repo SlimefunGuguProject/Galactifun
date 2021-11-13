@@ -238,9 +238,9 @@ public final class BaseMats {
     public static final SlimefunItemStack MOON_CHEESE = new SlimefunItemStack(
             "MOON_CHEESE",
             GalactifunHead.CHEESE,
-            "&6Moon Cheese",
+            "&6月球芝士",
             "",
-            "&7Ew"
+            "&7真恶心"
     );
     public static final SlimefunItemStack ENDER_BLOCK = new SlimefunItemStack(
             "ENDER_BLOCK",
@@ -291,7 +291,7 @@ public final class BaseMats {
             "",
             "&7取名真难",
             Bukkit.getPluginManager().isPluginEnabled("SlimefunWarfare") ?
-                    "&7Can be replaced by Laser Diode from Slimefun Warfare" :
+                    "&7在Slimefun Warfare中,可以代替极光二极管来使用" :
                     ""
     );
     public static final SlimefunItemStack LASERITE = new SlimefunItemStack(
