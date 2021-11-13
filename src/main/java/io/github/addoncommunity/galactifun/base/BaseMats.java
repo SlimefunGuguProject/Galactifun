@@ -172,7 +172,7 @@ public final class BaseMats {
     public static final SlimefunItemStack ION_ENGINE = new SlimefunItemStack(
             "ION_ENGINE",
             Material.FLINT_AND_STEEL,
-            "&bIon Engine"
+            "&b离子发动机"
     );
     public static final SlimefunItemStack ADVANCED_PROCESSING_UNIT = new SlimefunItemStack(
             "ADVANCED_PROCESSING_UNIT",
