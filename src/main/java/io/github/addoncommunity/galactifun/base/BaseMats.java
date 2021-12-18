@@ -41,7 +41,7 @@ public final class BaseMats {
     public static final SlimefunItemStack MOON_ROCK = new SlimefunItemStack(
             "MOON_ROCK",
             Material.ANDESITE,
-            "&7Moon Rock"
+            "&7月岩"
     );
     public static final SlimefunItemStack MARS_DUST = new SlimefunItemStack(
             "MARS_DUST",
@@ -51,7 +51,7 @@ public final class BaseMats {
     public static final SlimefunItemStack MARS_ROCK = new SlimefunItemStack(
             "MARS_ROCK",
             Material.TERRACOTTA,
-            "&cMars Rock"
+            "&c火星岩"
     );
     public static final SlimefunItemStack DRY_ICE = new SlimefunItemStack(
             "DRY_ICE",
@@ -172,7 +172,7 @@ public final class BaseMats {
     public static final SlimefunItemStack ION_ENGINE = new SlimefunItemStack(
             "ION_ENGINE",
             Material.FLINT_AND_STEEL,
-            "&bIon Engine"
+            "&b离子发动机"
     );
     public static final SlimefunItemStack ADVANCED_PROCESSING_UNIT = new SlimefunItemStack(
             "ADVANCED_PROCESSING_UNIT",
@@ -238,9 +238,9 @@ public final class BaseMats {
     public static final SlimefunItemStack MOON_CHEESE = new SlimefunItemStack(
             "MOON_CHEESE",
             GalactifunHead.CHEESE,
-            "&6Moon Cheese",
+            "&6月球芝士",
             "",
-            "&7Ew"
+            "&7真恶心"
     );
     public static final SlimefunItemStack ENDER_BLOCK = new SlimefunItemStack(
             "ENDER_BLOCK",
@@ -291,7 +291,7 @@ public final class BaseMats {
             "",
             "&7取名真难",
             Bukkit.getPluginManager().isPluginEnabled("SlimefunWarfare") ?
-                    "&7Can be replaced by Laser Diode from Slimefun Warfare" :
+                    "&7在Slimefun Warfare中,可以代替极光二极管来使用" :
                     ""
     );
     public static final SlimefunItemStack LASERITE = new SlimefunItemStack(

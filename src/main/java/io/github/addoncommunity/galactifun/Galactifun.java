@@ -78,21 +78,22 @@ public final class Galactifun extends AbstractAddon {
         instance = this;
 
         if (!isTest) {
-            if (!PaperLib.isPaper()) {
-                log(Level.SEVERE, "Galactifun only supports Paper and its forks (i.e. Airplane and Purpur)");
-                log(Level.SEVERE, "Please use Paper or a fork of Paper");
-                shouldDisable = true;
-            }
-            if (Slimefun.getMinecraftVersion().isBefore(MinecraftVersion.MINECRAFT_1_17)) {
-                log(Level.SEVERE, "Galactifun only supports Minecraft 1.17 and above");
-                log(Level.SEVERE, "Please use Minecraft 1.17 or above");
-                shouldDisable = true;
-            }
-            if (Bukkit.getPluginManager().isPluginEnabled("ClayTech")) {
-                log(Level.SEVERE, "Galactifun will not work properly with ClayTech");
-                log(Level.SEVERE, "Please disable ClayTech");
-                shouldDisable = true;
-            }
+        boolean shouldDisable = false;
+        if (!PaperLib.isPaper()) {
+            log(Level.SEVERE, "Galactifun只支持Paper和他的分支(例如Airplane和urpur)");
+            log(Level.SEVERE, "请使用Paper或者Paper的分支");
+            shouldDisable = true;
+        }
+        if (Slimefun.getMinecraftVersion().isBefore(MinecraftVersion.MINECRAFT_1_17)) {
+            log(Level.SEVERE, "Galactifun需要在Minecraft 1.17中运行");
+            log(Level.SEVERE, "请使用Minecraft 1.17");
+            shouldDisable = true;
+        }
+        if (Bukkit.getPluginManager().isPluginEnabled("ClayTech")) {
+            log(Level.SEVERE, "Galactifun不能和ClayTech在一起运行");
+            log(Level.SEVERE, "请关闭ClayTech");
+            shouldDisable = true;
+        }
 
             if (shouldDisable) {
                 Bukkit.getPluginManager().disablePlugin(this);
