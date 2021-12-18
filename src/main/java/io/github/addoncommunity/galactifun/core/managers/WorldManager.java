@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -27,7 +28,6 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.Waterlogged;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,9 +35,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockGrowEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
@@ -59,6 +61,7 @@ import io.github.addoncommunity.galactifun.base.universe.earth.Earth;
 import io.github.addoncommunity.galactifun.util.PersistentBlockPositions;
 import io.github.mooy1.infinitylib.common.Events;
 import io.github.mooy1.infinitylib.common.Scheduler;
+import io.github.thebusybiscuit.slimefun4.api.events.ExplosiveToolBreakBlocksEvent;
 import io.github.thebusybiscuit.slimefun4.api.events.GEOResourceGenerationEvent;
 import io.github.thebusybiscuit.slimefun4.api.events.WaypointCreateEvent;
 import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
@@ -261,24 +264,38 @@ public final class WorldManager implements Listener {
         AlienWorld world = this.alienWorlds.get(w);
         if (world != null) {
             SlimefunItemStack item = world.getMappedItem(b);
-            if (item != null) {
-                BlockPosition pos = new BlockPosition(b);
-                Set<BlockPosition> placed = b.getChunk().getPersistentDataContainer().getOrDefault(
-                        PLACED,
-                        PersistentBlockPositions.INSTANCE,
-                        new HashSet<>()
-                );
-                if (placed.contains(pos)) {
-                    placed.remove(pos);
-                    b.getChunk().getPersistentDataContainer().set(
-                            PLACED,
-                            PersistentBlockPositions.INSTANCE,
-                            placed
-                    );
-                } else {
-                    Location l = b.getLocation();
-                    e.setDropItems(false);
-                    w.dropItemNaturally(l.add(0.5, 0.5, 0.5), item.clone());
+            if (item != null && !removePlacedBlock(b)) {
+                e.setDropItems(false);
+                w.dropItemNaturally(b.getLocation().add(0.5, 0, 0.5), item.clone());
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    private void onBlockExplode(BlockExplodeEvent e) {
+        handleExplosion(e.blockList().iterator());
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    private void onEntityExplode(EntityExplodeEvent e) {
+        handleExplosion(e.blockList().iterator());
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    private void onExplosivePickUse(ExplosiveToolBreakBlocksEvent e) {
+        handleExplosion(e.getAdditionalBlocks().iterator());
+    }
+
+    private void handleExplosion(Iterator<Block> blocks) {
+        while (blocks.hasNext()) {
+            Block b = blocks.next();
+            World w = b.getWorld();
+            AlienWorld world = this.alienWorlds.get(w);
+            if (world != null) {
+                SlimefunItemStack item = world.getMappedItem(b);
+                if (item != null && !removePlacedBlock(b)) {
+                    blocks.remove();
+                    w.dropItemNaturally(b.getLocation().add(0.5, 0, 0.5), item.clone());
                 }
             }
         }
@@ -303,17 +320,7 @@ public final class WorldManager implements Listener {
         Block b = e.getBlock();
         AlienWorld world = this.alienWorlds.get(b.getWorld());
         if (world != null && world.getMappedItem(b) != null) {
-            Set<BlockPosition> placed = b.getChunk().getPersistentDataContainer().getOrDefault(
-                    PLACED,
-                    PersistentBlockPositions.INSTANCE,
-                    new HashSet<>()
-            );
-            placed.add(new BlockPosition(b));
-            b.getChunk().getPersistentDataContainer().set(
-                    PLACED,
-                    PersistentBlockPositions.INSTANCE,
-                    placed
-            );
+            addPlacedBlock(b);
         }
     }
 
@@ -350,7 +357,7 @@ public final class WorldManager implements Listener {
         if (e.getBucket() != Material.WATER_BUCKET) return;
         Player p = e.getPlayer();
         PlanetaryWorld world = this.getWorld(p.getWorld());
-        if (world != null) {
+        if (world != null && world != BaseUniverse.EARTH) {
             e.setCancelled(true);
             if (p.getGameMode() != GameMode.CREATIVE) {
                 ItemStack item = p.getInventory().getItem(e.getHand());
@@ -367,13 +374,7 @@ public final class WorldManager implements Listener {
             } else if (manager.getEffectAt(l, AtmosphericEffect.HEAT) > 1) {
                 p.getWorld().spawnParticle(Particle.SMOKE_NORMAL, l, 5);
             } else {
-                BlockData data = clicked.getBlockData();
-                if (data instanceof Waterlogged waterlogged) {
-                    waterlogged.setWaterlogged(true);
-                    clicked.setBlockData(waterlogged);
-                } else {
-                    toBePlaced.setType(Material.WATER);
-                }
+                e.setCancelled(false);
             }
         }
     }
@@ -394,6 +395,42 @@ public final class WorldManager implements Listener {
         }
 
         e.setValue(0);
+    }
+
+    public void addPlacedBlock(Block b) {
+        Set<BlockPosition> placed = b.getChunk().getPersistentDataContainer().getOrDefault(
+                PLACED,
+                PersistentBlockPositions.INSTANCE,
+                new HashSet<>()
+        );
+        placed.add(new BlockPosition(b));
+        b.getChunk().getPersistentDataContainer().set(
+                PLACED,
+                PersistentBlockPositions.INSTANCE,
+                placed
+        );
+    }
+
+    /**
+     * Removes a non-world-mapped block from the placed blocks list
+     *
+     * @return true if the block was a placed block, false if it was not
+     */
+    public boolean removePlacedBlock(Block b) {
+        Set<BlockPosition> placed = b.getChunk().getPersistentDataContainer().getOrDefault(
+                PLACED,
+                PersistentBlockPositions.INSTANCE,
+                new HashSet<>()
+        );
+        boolean remove = placed.remove(new BlockPosition(b));
+        if (remove) {
+            b.getChunk().getPersistentDataContainer().set(
+                    PLACED,
+                    PersistentBlockPositions.INSTANCE,
+                    placed
+            );
+        }
+        return remove;
     }
 
 }

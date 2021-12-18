@@ -1,19 +1,22 @@
 package io.github.addoncommunity.galactifun.api.universe.attributes.atmosphere;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.BiConsumer;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NonNull;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.primitives.Ints;
 import io.github.addoncommunity.galactifun.api.items.spacesuit.SpaceSuitStat;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
@@ -24,9 +27,9 @@ import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
  * @author Mooy1
  * @author Seggan
  */
-@AllArgsConstructor
-@ParametersAreNonnullByDefault
 public final class AtmosphericEffect {
+
+    private static final Map<String, AtmosphericEffect> allEffects = new HashMap<>();
 
     public static final AtmosphericEffect RADIATION = new AtmosphericEffect("RADIATION",
             SpaceSuitStat.RADIATION_RESISTANCE, PotionEffectType.WITHER);
@@ -58,7 +61,7 @@ public final class AtmosphericEffect {
     private final SpaceSuitStat stat;
     private final BiConsumer<Player, Integer> applier;
 
-    public AtmosphericEffect(@Nonnull String id, @Nullable SpaceSuitStat stat, @Nonnull PotionEffectType effectType) {
+    public AtmosphericEffect(@NonNull String id, @Nullable SpaceSuitStat stat, @NonNull PotionEffectType effectType) {
         this(id, stat, (player, level) -> player.addPotionEffect(new PotionEffect(
                 effectType,
                 200,
@@ -69,7 +72,24 @@ public final class AtmosphericEffect {
         )));
     }
 
-    public void apply(Player p, int level) {
+    public AtmosphericEffect(@NonNull String id, @Nullable SpaceSuitStat stat, @NonNull BiConsumer<Player, Integer> applier) {
+        this.id = id;
+        this.stat = stat;
+        this.applier = applier;
+
+        allEffects.put(id, this);
+    }
+
+    public static AtmosphericEffect getById(@NonNull String id) {
+        return allEffects.get(id);
+    }
+
+    @Nonnull
+    public static Set<AtmosphericEffect> allEffects() {
+        return ImmutableSet.copyOf(allEffects.values());
+    }
+
+    public void apply(@NonNull Player p, int level) {
         if (level > 0) {
             p.sendMessage(ChatColor.RED + "你严重的接触到" + this + "!");
             this.applier.accept(p, level);
