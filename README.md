@@ -1,17 +1,17 @@
-# Galactifun
+# Galactifun-星际
 
-A Slimefun addon which adds galaxies, star systems, planets, moons, rockets, and spacesuits. It has a large api for addon devs.
+Slimefun-Addon-Galactifun里面加入了星系,恒星系统,行星,卫星,火箭和宇航服.
+它有一个强大的开发API.
+灵感来自 Claytech(粘土科技) 和 GalactiCraft(星际) Mod.
 
-Inspiration taken from ClayTech and the mod GalactiCraft.
+## 下载
 
-## Download
+点击下面以下载: 
 
-Download here (just click the badge!): 
+[![构建 成功](https://builds.guizhanss.net/f/baoad/Galactifun/master/badge.svg)](https://builds.guizhanss.net/baoad/Galactifun/master)
 
-[![Build Status](https://thebusybiscuit.github.io/builds/Slimefun-Addon-Community/Galactifun/master/badge.svg)](https://thebusybiscuit.github.io/builds/Slimefun-Addon-Community/Galactifun/master)
+## 社区
 
-## Discord
-
-Feel free to join us on the Slimefun Addon Community Discord:
+Galactifun 国外社区:
 
 https://discord.gg/SqD3gg5SAU
