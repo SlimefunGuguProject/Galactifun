@@ -44,7 +44,7 @@ public final class CoreItemGroup {
             "blocks", new CustomItemStack(Material.COBBLESTONE, "&f星系方块")
     );
     public static final ItemGroup RELICS = new SubGroup(
-            "relics", new CustomItemStack(Material.CHISELED_POLISHED_BLACKSTONE, "&fGalactifun Relics")
+            "relics", new CustomItemStack(Material.CHISELED_POLISHED_BLACKSTONE, "&f星际遗迹")
     );
 
     public static final AssemblyItemGroup ASSEMBLY_CATEGORY = new AssemblyItemGroup(
