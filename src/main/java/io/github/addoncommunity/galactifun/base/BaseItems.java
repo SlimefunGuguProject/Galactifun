@@ -424,7 +424,7 @@ public final class BaseItems {
     public static final SlimefunItemStack TECHNOLOGICAL_SALVAGER = new SlimefunItemStack(
             "TECHNOLOGICAL_SALVAGER",
             GalactifunHead.CORE,
-            "&f遗物搜查机",
+            "&f遗迹搜查机",
             "",
             "&7从遗迹中搜寻有价值的东西",
             LoreBuilder.powerPerSecond(64),
