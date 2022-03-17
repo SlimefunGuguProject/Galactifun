@@ -63,7 +63,7 @@ public final class BaseMats {
     public static final SlimefunItemStack METHANE_ICE = new SlimefunItemStack(
             "METHANE_ICE",
             Material.BLUE_ICE,
-            "&bMethane Ice"
+            "&b甲烷冰"
     );
     public static final SlimefunItemStack SULFUR_BLOCK = new SlimefunItemStack(
             "SULFUR_BLOCK",
