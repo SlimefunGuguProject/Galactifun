@@ -241,7 +241,7 @@ public final class LaunchPadCore extends TickingMenuBlock implements RecipeDispl
             ret.add(new CustomItemStack(
                     item,
                     item.getI18NDisplayName(),
-                    "&7Efficiency: " + FUELS.get(id) + 'x'
+                    "&7效率: " + FUELS.get(id) + 'x'
             ));
         }
 
