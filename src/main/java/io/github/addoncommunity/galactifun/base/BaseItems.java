@@ -372,21 +372,21 @@ public final class BaseItems {
     public static final SlimefunItemStack ION_ROCKET = new SlimefunItemStack(
             "ION_ROCKET",
             GalactifunHead.ION_ROCKET,
-            "&bIon Rocket",
+            "&b离子火箭",
             "",
-            "&7Uses a specialized engine that",
-            "&7expels ions at great speed, granting",
-            "&7extreme fuel efficiency",
+            "&7它安装了专属的引擎",
+            "&7该引擎会高速排出离子",
+            "&7并提供极高的燃油效率",
             "",
-            "&7Fuel Capacity: 500",
-            "&7Cargo Capacity: 18"
+            "&7燃料容量: 500",
+            "&7可载重量: 18"
     );
     //</editor-fold>
     //<editor-fold desc="Relics" defaultstate="collapsed">
     public static final SlimefunItemStack ENGINE_RELIC = new SlimefunItemStack(
             "ENGINE_RELIC",
             Material.SEA_LANTERN,
-            "&fRelic: 'Letagivd Yynmukav",
+            "&f遗迹: 'Letagivd Yynmukav",
             "",
             "&7Dorepv 'lbarok 'tagivd yboths amukav",
             "&7uyigrene teuz'lopsi 'letagivd tote"
@@ -394,7 +394,7 @@ public final class BaseItems {
     public static final SlimefunItemStack REACTOR_RELIC = new SlimefunItemStack(
             "REACTOR_RELIC",
             Material.BEACON,
-            "&fRelic: Rotarenegortkele Yynmukav",
+            "&f遗迹: Rotarenegortkele Yynmukav",
             "",
             "&7Ovehcin zi 'taribos onhzom uyigrene",
             "&7oths lamud otk?"
@@ -402,7 +402,7 @@ public final class BaseItems {
     public static final SlimefunItemStack COMPUTER_RELIC = new SlimefunItemStack(
             "COMPUTER_RELIC",
             GalactifunHead.CORE,
-            "&fRelic: Retuypmok Yyntnavk",
+            "&f遗迹: Retuypmok Yyntnavk",
             "",
             "&7Aretupmoc eyenhcybo mehc eyertsyb ogonman",
             "&7einelsihcsar 'taled tugom aretuypmok eyntnavk"
@@ -410,23 +410,23 @@ public final class BaseItems {
     public static final SlimefunItemStack BROKEN_SOLAR_PANEL_RELIC = new SlimefunItemStack(
             "BROKEN_SOLAR_PANEL_RELIC",
             Material.DAYLIGHT_DETECTOR,
-            "&7Relic: 'Lenap Ayanhcenlos Ayanamolop",
+            "&7遗迹: 'Lenap Ayanhcenlos Ayanamolop",
             "",
             "&7'Lenap ayanhcenlos ayarats 'nehco"
     );
     public static final SlimefunItemStack FALLEN_SATELLITE_RELIC = new SlimefunItemStack(
             "FALLEN_SATELLITE_RELIC",
             Material.CHISELED_QUARTZ_BLOCK,
-            "&7Relic: Kintups Yyhsdap",
+            "&7遗迹: Kintups Yyhsdap",
             "",
             "&7Aben s lapu yyrotok, kintups"
     );
     public static final SlimefunItemStack TECHNOLOGICAL_SALVAGER = new SlimefunItemStack(
             "TECHNOLOGICAL_SALVAGER",
             GalactifunHead.CORE,
-            "&fTechnological Salvager",
+            "&f遗物搜查机",
             "",
-            "&7Salvages anything salvageable from relics",
+            "&7从遗迹中搜寻有价值的东西",
             LoreBuilder.powerPerSecond(64),
             LoreBuilder.powerBuffer(64)
     );
