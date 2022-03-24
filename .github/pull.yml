@@ -1,0 +1,9 @@
+version: "1"
+rules:
+  - base: master
+    upstream: Slimefun-Addon-Community:master
+    mergeMethod: merge
+    assignees:
+      - baoad
+    conflictReviewers:
+      - baoad
