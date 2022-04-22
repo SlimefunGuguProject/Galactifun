@@ -18,6 +18,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.World;
+import org.bukkit.WorldBorder;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
@@ -165,7 +166,6 @@ public abstract class Rocket extends SlimefunItem {
             return true;
         }, (player, pw) -> {
             player.closeInventory();
-            // i hate biginteger math
             long usedFuel =(long) Math.ceil(pw.distanceTo(world) / (DISTANCE_PER_FUEL * eff));
             player.sendMessage(ChatColor.YELLOW + "你正在前往 " + pw.name() + "时并会消耗 " +
                     usedFuel + "燃料，你确定要去吗？(yes/no)");
@@ -178,7 +178,12 @@ public abstract class Rocket extends SlimefunItem {
                             String[] split = Util.SPACE_PATTERN.split(trimmed);
                             int x = Integer.parseInt(split[0]);
                             int z = Integer.parseInt(split[1]);
-                            launch(player, b, pw, fuel - usedFuel, fuelType, x, z);
+                            WorldBorder border = player.getWorld().getWorldBorder();
+                            if (border.isInside(new Location(pw.world(), x, 0, z))) {
+                                launch(player, b, pw, fuel - usedFuel, fuelType, x, z);
+                            } else {
+                                player.sendMessage(ChatColor.RED + "The coordinates you entered are outside of the world border");
+                            }
                         } else {
                             p.sendMessage(ChatColor.RED + "坐标格式无效！请使用该格式 <x> <z>");
                         }
