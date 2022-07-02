@@ -16,4 +16,8 @@ public final class Galaxy extends UniversalObject {
         super(name, type, orbit, orbiting, baseItem);
     }
 
+    public Galaxy(String id, String name, GalaxyType type, Orbit orbit, TheUniverse orbiting, ItemStack baseItem) {
+        super(id, name, type, orbit, orbiting, baseItem);
+    }
+
 }

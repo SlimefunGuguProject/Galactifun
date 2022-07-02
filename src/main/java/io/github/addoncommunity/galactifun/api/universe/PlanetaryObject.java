@@ -40,4 +40,20 @@ public class PlanetaryObject extends UniversalObject {
         this.gravity = gravity;
     }
 
+    public PlanetaryObject(String id, String name, PlanetaryType type, Orbit orbit, StarSystem orbiting, ItemStack baseItem,
+                           @Nonnull DayCycle dayCycle, @Nonnull Atmosphere atmosphere, @Nonnull Gravity gravity) {
+        super(id, name, type, orbit, orbiting, baseItem);
+        this.dayCycle = dayCycle;
+        this.atmosphere = atmosphere;
+        this.gravity = gravity;
+    }
+
+    public PlanetaryObject(String id, String name, PlanetaryType type, Orbit orbit, PlanetaryObject orbiting, ItemStack baseItem,
+                           @Nonnull DayCycle dayCycle, @Nonnull Atmosphere atmosphere, @Nonnull Gravity gravity) {
+        super(id, name, type, orbit, orbiting, baseItem);
+        this.dayCycle = dayCycle;
+        this.atmosphere = atmosphere;
+        this.gravity = gravity;
+    }
+
 }

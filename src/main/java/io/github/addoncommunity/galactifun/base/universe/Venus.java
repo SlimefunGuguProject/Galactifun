@@ -32,6 +32,11 @@ public final class Venus extends SimpleAlienWorld {
         super(name, type, orbit, orbiting, baseItem, dayCycle, atmosphere, gravity);
     }
 
+    public Venus(String id, String name, PlanetaryType type, Orbit orbit, StarSystem orbiting, ItemStack baseItem,
+                 DayCycle dayCycle, Atmosphere atmosphere, Gravity gravity) {
+        super(id, name, type, orbit, orbiting, baseItem, dayCycle, atmosphere, gravity);
+    }
+
     @Override
     public void getPopulators(@Nonnull List<BlockPopulator> populators) {
         populators.add(new VolcanoPopulator(117, Material.MAGMA_BLOCK, Material.LAVA));

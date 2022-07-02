@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 
 import lombok.Getter;
 
+import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
+
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
@@ -52,11 +54,11 @@ public final class Galactifun extends AbstractAddon {
     private boolean shouldDisable = false;
 
     public Galactifun() {
-        super("Slimefun-Addon-Community", "Galactifun", "master", "auto-update");
+        super("SlimefunGuguProject", "Galactifun", "master", "auto-update");
     }
 
     public Galactifun(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
-        super(loader, description, dataFolder, file, "Slimefun-Addon-Community", "Galactifun", "master", "auto-update");
+        super(loader, description, dataFolder, file, "SlimefunGuguProject", "Galactifun", "master", "auto-update");
         isTest = true;
     }
 
@@ -77,26 +79,30 @@ public final class Galactifun extends AbstractAddon {
         instance = this;
 
         if (!isTest) {
-        boolean shouldDisable = false;
-        if (!PaperLib.isPaper()) {
-            log(Level.SEVERE, "Galactifun只支持Paper和他的分支(例如Airplane和urpur)");
-            log(Level.SEVERE, "请使用Paper或者Paper的分支");
-            shouldDisable = true;
-        }
-        if (Slimefun.getMinecraftVersion().isBefore(MinecraftVersion.MINECRAFT_1_17)) {
-            log(Level.SEVERE, "Galactifun需要在Minecraft 1.17中运行");
-            log(Level.SEVERE, "请使用Minecraft 1.17");
-            shouldDisable = true;
-        }
-        if (Bukkit.getPluginManager().isPluginEnabled("ClayTech")) {
-            log(Level.SEVERE, "Galactifun不能和ClayTech在一起运行");
-            log(Level.SEVERE, "请关闭ClayTech");
-            shouldDisable = true;
-        }
+            boolean shouldDisable = false;
+            if (!PaperLib.isPaper()) {
+                log(Level.SEVERE, "Galactifun 只支持Paper以及Paper的衍生服务端(例如Airplane和Purpur)");
+                log(Level.SEVERE, "请使用Paper或者Paper的衍生服务端");
+                shouldDisable = true;
+            }
+            if (Slimefun.getMinecraftVersion().isBefore(MinecraftVersion.MINECRAFT_1_17)) {
+                log(Level.SEVERE, "Galactifun需要在 Minecraft 1.17 及以上版本中运行");
+                log(Level.SEVERE, "请使用Minecraft 1.17 及以上版本");
+                shouldDisable = true;
+            }
+            if (Bukkit.getPluginManager().isPluginEnabled("ClayTech")) {
+                log(Level.SEVERE, "Galactifun 不能和 ClayTech 同时运行");
+                log(Level.SEVERE, "请移除 ClayTech 或 Galactifun");
+                shouldDisable = true;
+            }
 
             if (shouldDisable) {
                 Bukkit.getPluginManager().disablePlugin(this);
                 return;
+            }
+
+            if (getConfig().getBoolean("auto-update", true) && getDescription().getVersion().startsWith("Build")) {
+                new GuizhanBuildsUpdater(this, getFile(), "baoad", "Galactifun", "master", false, "zh-CN").start();
             }
         }
 
@@ -118,7 +124,7 @@ public final class Galactifun extends AbstractAddon {
         Scheduler.run(() -> log(Level.INFO,
                 "################# Galactifun " + getPluginVersion() + " #################",
                 "",
-                "Galactifun是开源的，您可以在(英文): ",
+                "Galactifun是开源的，如果有任何问题, 请在此汇报: ",
                 getBugTrackerURL(),
                 "加入Slimefun插件社区: discord.gg/SqD3gg5SAU",
                 "",

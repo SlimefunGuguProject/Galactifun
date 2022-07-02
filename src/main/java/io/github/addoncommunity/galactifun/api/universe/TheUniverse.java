@@ -11,4 +11,8 @@ public final class TheUniverse extends UniversalObject {
         super(name);
     }
 
+    public TheUniverse(String id, String name) {
+        super(id, name);
+    }
+
 }
