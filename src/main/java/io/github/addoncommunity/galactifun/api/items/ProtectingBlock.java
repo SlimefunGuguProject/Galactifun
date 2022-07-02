@@ -49,13 +49,13 @@ public abstract class ProtectingBlock extends MenuBlock implements EnergyNetComp
             Material.STRUCTURE_VOID,
             "&a启用",
             "",
-            "&7点击以关闭"
+            "&7点击关闭"
     );
     private static final ItemStack DISABLED_ITEM = new CustomItemStack(
             Material.BARRIER,
             "&c关闭",
             "",
-            "&7点击已启用"
+            "&7点击启用"
     );
     private static int counter = 0;
 

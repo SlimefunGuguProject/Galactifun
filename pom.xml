@@ -49,9 +49,9 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>io.github.Slimefun</groupId>
+            <groupId>com.github.StarWishsama</groupId>
             <artifactId>Slimefun4</artifactId>
-            <version>RC-29</version>
+            <version>2022.06</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
