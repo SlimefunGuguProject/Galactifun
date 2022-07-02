@@ -27,6 +27,11 @@ public final class Io extends SimpleAlienWorld {
         super(name, type, orbit, orbiting, baseItem, dayCycle, atmosphere, gravity);
     }
 
+    public Io(String id, String name, PlanetaryType type, Orbit orbit, PlanetaryObject orbiting, ItemStack baseItem,
+              DayCycle dayCycle, Atmosphere atmosphere, Gravity gravity) {
+        super(id, name, type, orbit, orbiting, baseItem, dayCycle, atmosphere, gravity);
+    }
+
     @Override
     public void getPopulators(@Nonnull List<BlockPopulator> populators) {
         populators.add(new VolcanoPopulator(115, Material.MAGMA_BLOCK, Material.LAVA));

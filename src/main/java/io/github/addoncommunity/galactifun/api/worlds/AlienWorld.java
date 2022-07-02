@@ -66,6 +66,16 @@ public abstract class AlienWorld extends PlanetaryWorld {
         super(name, type, orbit, orbiting, baseItem, dayCycle, atmosphere, gravity);
     }
 
+    public AlienWorld(String id, String name, PlanetaryType type, Orbit orbit, StarSystem orbiting, ItemStack baseItem,
+                      DayCycle dayCycle, Atmosphere atmosphere, Gravity gravity) {
+        super(id, name, type, orbit, orbiting, baseItem, dayCycle, atmosphere, gravity);
+    }
+
+    public AlienWorld(String id, String name, PlanetaryType type, Orbit orbit, PlanetaryObject orbiting, ItemStack baseItem,
+                      DayCycle dayCycle, Atmosphere atmosphere, Gravity gravity) {
+        super(id, name, type, orbit, orbiting, baseItem, dayCycle, atmosphere, gravity);
+    }
+
     @Nullable
     @Override
     protected World loadWorld() {

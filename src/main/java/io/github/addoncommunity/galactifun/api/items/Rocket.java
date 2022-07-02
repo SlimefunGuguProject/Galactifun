@@ -121,7 +121,7 @@ public abstract class Rocket extends SlimefunItem {
         WorldManager worldManager = Galactifun.worldManager();
         PlanetaryWorld world = worldManager.getWorld(p.getWorld());
         if (world == null) {
-            p.sendMessage(ChatColor.RED + "你不能从这个世界到太空!");
+            p.sendMessage(ChatColor.RED + "你不能从这个世界前往太空!");
             return;
         }
 
@@ -167,7 +167,7 @@ public abstract class Rocket extends SlimefunItem {
         }, (player, pw) -> {
             player.closeInventory();
             long usedFuel =(long) Math.ceil(pw.distanceTo(world) / (DISTANCE_PER_FUEL * eff));
-            player.sendMessage(ChatColor.YELLOW + "你正在前往 " + pw.name() + "时并会消耗 " +
+            player.sendMessage(ChatColor.YELLOW + "你正在前往 " + pw.name() + ", 会消耗 " +
                     usedFuel + "燃料，你确定要去吗？(yes/no)");
             ChatUtils.awaitInput(player, (input) -> {
                 if (input.equalsIgnoreCase("yes")) {
@@ -182,7 +182,7 @@ public abstract class Rocket extends SlimefunItem {
                             if (border.isInside(new Location(pw.world(), x, 0, z))) {
                                 launch(player, b, pw, fuel - usedFuel, fuelType, x, z);
                             } else {
-                                player.sendMessage(ChatColor.RED + "The coordinates you entered are outside of the world border");
+                                player.sendMessage(ChatColor.RED + "该坐标位于世界边界外!");
                             }
                         } else {
                             p.sendMessage(ChatColor.RED + "坐标格式无效！请使用该格式 <x> <z>");
@@ -243,7 +243,7 @@ public abstract class Rocket extends SlimefunItem {
             }
 
             if (!Slimefun.getProtectionManager().hasPermission(p, destBlock, Interaction.PLACE_BLOCK)) {
-                p.sendMessage(ChatColor.RED + "Launch was not successful! You do not have permission to land there!");
+                p.sendMessage(ChatColor.RED + "发射失败! 你没有权限降落在目标地点!");
                 BlockStorage.addBlockInfo(rocket, "isLaunching", "false");
                 return;
             }

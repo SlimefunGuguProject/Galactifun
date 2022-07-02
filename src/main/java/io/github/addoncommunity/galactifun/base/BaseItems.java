@@ -102,7 +102,8 @@ public final class BaseItems {
             "&f宇航服头盔",
             "",
             "&7基础宇航服头盔",
-            "&7右键&e使用"
+            "",
+            LoreBuilder.RIGHT_CLICK_TO_USE
     );
     public static final SlimefunItemStack SPACE_SUIT_CHEST = new SlimefunItemStack(
             "SPACE_SUIT_CHEST",
@@ -164,7 +165,7 @@ public final class BaseItems {
             "&7建造各种物品",
             "",
             LoreBuilder.machine(MachineTier.END_GAME, MachineType.MACHINE),
-            LoreBuilder.power(2048, " 每个")
+            LoreBuilder.power(2048, " 每个物品")
     );
     public static final SlimefunItemStack STARGATE_RING = new SlimefunItemStack(
             "STARGATE_RING",

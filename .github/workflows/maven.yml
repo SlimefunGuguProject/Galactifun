@@ -1,38 +1,24 @@
-name: Build Pull Request
+name: Java CI
 
 on:
   push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
-    branches: [ master ]
-# 注意一下，这个是分支名 可能是main
 jobs:
   build:
-
+    if: startsWith(github.event.head_commit.message, '[CI skip]') == false
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-      # jdk 设置
+      - uses: actions/checkout@v3.0.2
       - name: Set up JDK 16
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
+          distribution: 'temurin'
           java-version: 16
-      # 1.8 = Java8 可以直接写8
-      # 一些拓展的版本可能是11 或16
-      - name: submodules-init
-        uses: snickerbockers/submodules-init@v4
+          cache: 'maven'
       - name: Build with Maven
-        run: mvn -B package -T 2C
-      - name: Archive artifacts (artifacts)
-        uses: actions/upload-artifact@v2
-        if: success()
-        with:
-          name: Galactifun zh-CN
-          path: target/Galactifun v32 zh-CN.jar
-# 注意要和打包出来的一致 Actions..
+        run: mvn package --file pom.xml

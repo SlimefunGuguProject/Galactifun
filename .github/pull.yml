@@ -4,6 +4,7 @@ rules:
     upstream: Slimefun-Addon-Community:master
     mergeMethod: merge
     assignees:
-      - baoad
+      - ybw0014
     conflictReviewers:
-      - baoad
+      - ybw0014
+

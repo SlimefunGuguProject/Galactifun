@@ -56,13 +56,22 @@ public final class AtmosphericEffect {
 
     @Getter
     private final String id;
+    private final String name;
     @Getter
     @Nullable
     private final SpaceSuitStat stat;
     private final BiConsumer<Player, Integer> applier;
 
     public AtmosphericEffect(@NonNull String id, @Nullable SpaceSuitStat stat, @NonNull PotionEffectType effectType) {
-        this(id, stat, (player, level) -> player.addPotionEffect(new PotionEffect(
+        this(id, ChatUtils.humanize(id), stat, effectType);
+    }
+
+    public AtmosphericEffect(@NonNull String id, @Nullable SpaceSuitStat stat, @NonNull BiConsumer<Player, Integer> applier) {
+        this(id, ChatUtils.humanize(id), stat, applier);
+    }
+
+    public AtmosphericEffect(@Nonnull String id, @NonNull String name, @Nullable SpaceSuitStat stat, @NonNull PotionEffectType effectType) {
+        this(id, name, stat, (player, level) -> player.addPotionEffect(new PotionEffect(
                 effectType,
                 200,
                 Math.min(200, level - 1), // i think the max is 255 but to be on the safe side
@@ -72,8 +81,9 @@ public final class AtmosphericEffect {
         )));
     }
 
-    public AtmosphericEffect(@NonNull String id, @Nullable SpaceSuitStat stat, @NonNull BiConsumer<Player, Integer> applier) {
+    public AtmosphericEffect(@NonNull String id, @NonNull String name, @Nullable SpaceSuitStat stat, @NonNull BiConsumer<Player, Integer> applier) {
         this.id = id;
+        this.name = name;
         this.stat = stat;
         this.applier = applier;
 
@@ -91,14 +101,14 @@ public final class AtmosphericEffect {
 
     public void apply(@NonNull Player p, int level) {
         if (level > 0) {
-            p.sendMessage(ChatColor.RED + "你严重的接触到" + this + "!");
+            p.sendMessage(ChatColor.RED + "你已经暴露在" + this + "中!");
             this.applier.accept(p, level);
         }
     }
 
     @Override
     public String toString() {
-        return ChatUtils.humanize(this.id);
+        return ChatUtils.humanize(this.name);
     }
 
     @Override

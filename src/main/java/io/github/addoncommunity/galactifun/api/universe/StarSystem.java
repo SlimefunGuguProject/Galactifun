@@ -18,6 +18,10 @@ public final class StarSystem extends UniversalObject {
         super(name, type, orbit, orbiting, baseItem);
     }
 
+    public StarSystem(String id, String name, StarSystemType type, Orbit orbit, Galaxy orbiting, ItemStack baseItem) {
+        super(id, name, type, orbit, orbiting, baseItem);
+    }
+
     @Override
     public double distanceTo(@Nonnull UniversalObject other) {
         if (this.orbitLevel > other.orbitLevel) {

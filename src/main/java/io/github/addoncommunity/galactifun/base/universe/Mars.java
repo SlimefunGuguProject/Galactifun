@@ -39,6 +39,11 @@ public final class Mars extends SimpleAlienWorld {
         super(name, type, orbit, orbiting, baseItem, dayCycle, atmosphere, gravity);
     }
 
+    public Mars(String id, String name, PlanetaryType type, Orbit orbit, StarSystem orbiting, ItemStack baseItem,
+                DayCycle dayCycle, Atmosphere atmosphere, Gravity gravity) {
+        super(id, name, type, orbit, orbiting, baseItem, dayCycle, atmosphere, gravity);
+    }
+
     @Nonnull
     @Override
     protected Material generateMaterial(@Nonnull Random random, int x, int y, int z, int top) {

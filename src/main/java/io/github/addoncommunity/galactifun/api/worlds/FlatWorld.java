@@ -46,6 +46,14 @@ public abstract class FlatWorld extends AlienWorld {
         super(name, type, orbit, orbiting, baseItem, dayCycle, atmosphere, gravity);
     }
 
+    public FlatWorld(String id, String name, PlanetaryType type, Orbit orbit, StarSystem orbiting, ItemStack baseItem, DayCycle dayCycle, Atmosphere atmosphere, Gravity gravity) {
+        super(id, name, type, orbit, orbiting, baseItem, dayCycle, atmosphere, gravity);
+    }
+
+    public FlatWorld(String id, String name, PlanetaryType type, Orbit orbit, PlanetaryObject orbiting, ItemStack baseItem, DayCycle dayCycle, Atmosphere atmosphere, Gravity gravity) {
+        super(id, name, type, orbit, orbiting, baseItem, dayCycle, atmosphere, gravity);
+    }
+
     /**
      * Gets the layers of this world. The returned value is a sorted map of ints and {@link Material},
      * with each int being the top bound (inclusive) of the material's generation. See the {@link Europa}

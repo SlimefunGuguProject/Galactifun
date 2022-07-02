@@ -7,6 +7,11 @@ import java.util.UUID;
 
 import javax.annotation.Nonnull;
 
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -83,6 +88,7 @@ public final class WorldSelector {
         ChestMenu menu = new ChestMenu(object.name());
         menu.setEmptySlotsClickable(false);
 
+        menu.addMenuOpeningHandler(player -> player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F));
         // back button
         menu.addItem(0, ChestMenuUtils.getBackButton(p));
         if (object.orbiting() == null) {
@@ -114,11 +120,11 @@ public final class WorldSelector {
 
                     if (distance > 0) {
                         lore.add(Component.text("距离: " + (distance < 1
-                                ? distance * Util.KM_PER_LY + "公里"
-                                : distance + "光年")
+                                ? distance * Util.KM_PER_LY + " 公里"
+                                : distance + " 光年")
                         ).color(NamedTextColor.GRAY));
                     } else {
-                        lore.add(Component.text("你所在这里!").color(NamedTextColor.GRAY));
+                        lore.add(Component.text("你在这里!").color(NamedTextColor.GRAY));
                     }
 
                     KnowledgeLevel.get(p, world).addLore(lore, world);
@@ -158,8 +164,8 @@ public final class WorldSelector {
 
                     if (distance > 0) {
                         lore.add(Component.text("距离: " + (distance < 1
-                                ? distance * Util.KM_PER_LY + "公里"
-                                : distance + "光年")
+                                ? distance * Util.KM_PER_LY + " 公里"
+                                : distance + " 光年")
                         ).color(NamedTextColor.GRAY));
                     } else {
                         lore.add(Component.text("你的位置!").color(NamedTextColor.GRAY));
