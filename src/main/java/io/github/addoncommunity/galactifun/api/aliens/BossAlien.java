@@ -146,7 +146,7 @@ public abstract class BossAlien<T extends Mob> extends Alien<T> {
 
         bossbar = this.style.create(manager.bossKey(), name());
         bossbar.setVisible(true);
-        bossbar.setProgress(entity.getHealth() / maxHealth());
+        bossbar.setProgress(Math.min(entity.getHealth() / maxHealth(), 1.0));
         this.bossBars.put(entity, bossbar);
         return bossbar;
     }
