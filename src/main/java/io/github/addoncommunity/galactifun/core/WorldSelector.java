@@ -119,8 +119,8 @@ public final class WorldSelector {
                     lore.remove(lore.size() - 1);
 
                     if (distance > 0) {
-                        lore.add(Component.text("距离: " + (distance < 1
-                                ? distance * Util.KM_PER_LY + " 公里"
+                        lore.add(Component.text("距离: " + (distance < .5
+                                ? "%.3f 公里".formatted(distance * Util.KM_PER_LY)
                                 : distance + " 光年")
                         ).color(NamedTextColor.GRAY));
                     } else {
@@ -168,7 +168,7 @@ public final class WorldSelector {
                                 : distance + " 光年")
                         ).color(NamedTextColor.GRAY));
                     } else {
-                        lore.add(Component.text("你的位置!").color(NamedTextColor.GRAY));
+                        lore.add(Component.text("你在这里!").color(NamedTextColor.GRAY));
                     }
 
                     if (orbiter instanceof PlanetaryWorld planetaryWorld) {
