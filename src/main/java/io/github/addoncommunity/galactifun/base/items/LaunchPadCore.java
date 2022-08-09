@@ -1,9 +1,8 @@
 package io.github.addoncommunity.galactifun.base.items;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.annotation.Nonnull;
@@ -21,10 +20,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 
 import io.github.addoncommunity.galactifun.api.items.Rocket;
-import io.github.addoncommunity.galactifun.api.universe.attributes.atmosphere.Gas;
 import io.github.addoncommunity.galactifun.base.BaseItems;
-import io.github.addoncommunity.galactifun.base.BaseMats;
 import io.github.addoncommunity.galactifun.util.BSUtils;
+import io.github.addoncommunity.galactifun.util.ChunkStorage;
 import io.github.addoncommunity.galactifun.util.Util;
 import io.github.mooy1.infinitylib.common.PersistentType;
 import io.github.mooy1.infinitylib.common.StackUtils;
@@ -34,9 +32,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.ItemUtils;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
@@ -45,7 +41,7 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 
-public final class LaunchPadCore extends TickingMenuBlock implements RecipeDisplayItem {
+public final class LaunchPadCore extends TickingMenuBlock {
 
 
     private static final int[] BACKGROUND = {
@@ -64,20 +60,6 @@ public final class LaunchPadCore extends TickingMenuBlock implements RecipeDispl
     };
     private static final int FUEL_SLOT = 33;
 
-    // TODO improve fuel system
-    public static final Map<String, Double> FUELS = new HashMap<>();
-
-    static {
-        FUELS.put(Gas.HYDROCARBONS.item().getItemId(), 0.5);
-        FUELS.put(SlimefunItems.OIL_BUCKET.getItemId(), 0.5);
-        FUELS.put(SlimefunItems.FUEL_BUCKET.getItemId(), 1.0);
-        FUELS.put(Gas.HYDROGEN.item().getItemId(), 3.5);
-        FUELS.put(Gas.AMMONIA.item().getItemId(), 4.0);
-        FUELS.put(Gas.METHANE.item().getItemId(), 6.0);
-        FUELS.put(Gas.ARGON.item().getItemId(), 18.0);
-        FUELS.put(BaseMats.FUSION_PELLET.getItemId(), 66_227.0);
-    }
-
     public LaunchPadCore(ItemGroup category, SlimefunItemStack item, RecipeType type, ItemStack[] recipe) {
         super(category, item, type, recipe);
         addItemHandler((BlockUseHandler) LaunchPadCore::onInteract);
@@ -90,16 +72,11 @@ public final class LaunchPadCore extends TickingMenuBlock implements RecipeDispl
         SlimefunItem sfItem = BlockStorage.check(b);
         if (!(sfItem instanceof Rocket rocket)) return;
 
+        if (ChunkStorage.isTagged(b, "isLaunching")) return;
+
         Location l = b.getLocation();
-
-        String string = BlockStorage.getLocationInfo(l, "isLaunching");
-        if (Boolean.parseBoolean(string)) return;
-
-        string = BlockStorage.getLocationInfo(l, "fuel");
-        int fuel = 0;
-        if (string != null) {
-            fuel = Integer.parseInt(string);
-        }
+        String string = Objects.requireNonNullElse(BlockStorage.getLocationInfo(l, "fuel"), "0");
+        int fuel = Integer.parseInt(string);
 
         string = BlockStorage.getLocationInfo(l, "fuelType");
 
@@ -108,7 +85,7 @@ public final class LaunchPadCore extends TickingMenuBlock implements RecipeDispl
             if (fuelItem != null) {
                 String id = StackUtils.getIdOrType(fuelItem);
 
-                if (FUELS.containsKey(id) && (string == null || id.equals(string)) && rocket.allowedFuels().contains(id)) {
+                if ((string == null || id.equals(string)) && rocket.allowedFuels().containsKey(id)) {
                     menu.consumeItem(FUEL_SLOT);
                     BSUtils.addBlockInfo(l.getBlock(), "fuel", ++fuel);
                     if (string == null) {
@@ -149,7 +126,7 @@ public final class LaunchPadCore extends TickingMenuBlock implements RecipeDispl
     }
 
     public static boolean canBreak(@Nonnull Player p, @Nonnull Block b) {
-        if (BSUtils.getStoredBoolean(b.getRelative(BlockFace.UP).getLocation(), "isLaunching")) {
+        if (ChunkStorage.isTagged(b.getRelative(BlockFace.UP), "isLaunching")) {
             p.sendMessage(ChatColor.RED + "你不能破坏火箭发射台!");
             return false;
         }
@@ -229,23 +206,6 @@ public final class LaunchPadCore extends TickingMenuBlock implements RecipeDispl
         }
 
         return true;
-    }
-
-    @Nonnull
-    @Override
-    public List<ItemStack> getDisplayRecipes() {
-        List<ItemStack> ret = new ArrayList<>();
-
-        for (String id : FUELS.keySet()) {
-            ItemStack item = StackUtils.itemByIdOrType(id);
-            ret.add(new CustomItemStack(
-                    item,
-                    item.getI18NDisplayName(),
-                    "&7效率: " + FUELS.get(id) + 'x'
-            ));
-        }
-
-        return ret;
     }
 
     @Override

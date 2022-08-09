@@ -3,9 +3,9 @@ package io.github.addoncommunity.galactifun.api.items;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 
@@ -43,10 +43,10 @@ import org.bukkit.util.Vector;
 import io.github.addoncommunity.galactifun.Galactifun;
 import io.github.addoncommunity.galactifun.api.worlds.PlanetaryWorld;
 import io.github.addoncommunity.galactifun.base.BaseItems;
-import io.github.addoncommunity.galactifun.base.items.LaunchPadCore;
 import io.github.addoncommunity.galactifun.base.items.knowledge.KnowledgeLevel;
 import io.github.addoncommunity.galactifun.core.WorldSelector;
 import io.github.addoncommunity.galactifun.core.managers.WorldManager;
+import io.github.addoncommunity.galactifun.util.ChunkStorage;
 import io.github.addoncommunity.galactifun.util.Util;
 import io.github.mooy1.infinitylib.common.PersistentType;
 import io.github.mooy1.infinitylib.common.Scheduler;
@@ -55,9 +55,12 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.ItemUtils;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 import io.github.thebusybiscuit.slimefun4.libraries.paperlib.PaperLib;
 import io.github.thebusybiscuit.slimefun4.utils.ChatUtils;
@@ -65,7 +68,7 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
-public abstract class Rocket extends SlimefunItem {
+public abstract class Rocket extends SlimefunItem implements RecipeDisplayItem {
 
     public static final NamespacedKey CARGO_KEY = Galactifun.createKey("cargo");
 
@@ -78,14 +81,16 @@ public abstract class Rocket extends SlimefunItem {
     @Getter
     private final int storageCapacity;
     @Getter
-    private final Set<String> allowedFuels;
+    private final Map<String, Double> allowedFuels = new HashMap<>();
 
     public Rocket(ItemGroup category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, int fuelCapacity, int storageCapacity) {
         super(category, item, recipeType, recipe);
 
         this.fuelCapacity = fuelCapacity;
         this.storageCapacity = storageCapacity;
-        this.allowedFuels = getAllowedFuels().stream().map(StackUtils::getIdOrType).collect(Collectors.toUnmodifiableSet());
+        for (Map.Entry<ItemStack, Double> entry : getAllowedFuels().entrySet()) {
+            allowedFuels.put(StackUtils.getIdOrType(entry.getKey()), entry.getValue());
+        }
 
         addItemHandler((BlockUseHandler) e -> e.getClickedBlock().ifPresent(block -> {
             e.cancel();
@@ -112,8 +117,7 @@ public abstract class Rocket extends SlimefunItem {
     private void openGUI(@Nonnull Player p, @Nonnull Block b) {
         if (!BlockStorage.check(b, this.getId())) return;
 
-        String string = BlockStorage.getLocationInfo(b.getLocation(), "isLaunching");
-        if (Boolean.parseBoolean(string)) {
+        if (ChunkStorage.isTagged(b, "isLaunching")) {
             p.sendMessage(ChatColor.RED + "火箭正在发射!");
             return;
         }
@@ -125,8 +129,7 @@ public abstract class Rocket extends SlimefunItem {
             return;
         }
 
-        string = BlockStorage.getLocationInfo(b.getLocation(), "fuel");
-        if (string == null) return;
+        String string = Objects.requireNonNullElse(BlockStorage.getLocationInfo(b.getLocation(), "fuel"), "0");
         int fuel = Integer.parseInt(string);
         if (fuel == 0) {
             p.sendMessage(ChatColor.RED + "火箭没有燃料!");
@@ -136,8 +139,7 @@ public abstract class Rocket extends SlimefunItem {
         string = BlockStorage.getLocationInfo(b.getLocation(), "fuelType");
         if (string == null) return;
         String fuelType = string;
-        Double eff = LaunchPadCore.FUELS.get(string);
-        if (eff == null) return;
+        double eff = allowedFuels.get(string);
 
         // ly
         double maxDistance = fuel * DISTANCE_PER_FUEL * eff;
@@ -162,7 +164,6 @@ public abstract class Rocket extends SlimefunItem {
                         .build()
                 );
             }
-
             return true;
         }, (player, pw) -> {
             player.closeInventory();
@@ -194,7 +195,7 @@ public abstract class Rocket extends SlimefunItem {
     }
 
     public void launch(@Nonnull Player p, @Nonnull Block rocket, PlanetaryWorld worldTo, long fuelLeft, String fuelType, int x, int z) {
-        BlockStorage.addBlockInfo(rocket, "isLaunching", "true");
+        ChunkStorage.tag(rocket, "isLaunching");
 
         World world = p.getWorld();
 
@@ -232,7 +233,7 @@ public abstract class Rocket extends SlimefunItem {
             Block destBlock = null;
             for (int y = to.getMaxHeight(); y > to.getMinHeight(); y--) {
                 Block b = to.getBlockAt(x, y, z);
-                if (b.isSolid() && !BlockStorage.check(b, BaseItems.LANDING_HATCH.getItemId())) {
+                if ((b.isBuildable() || b.isLiquid()) && !BlockStorage.check(b, BaseItems.LANDING_HATCH.getItemId())) {
                     destBlock = b.getRelative(BlockFace.UP);
                     break;
                 }
@@ -244,7 +245,7 @@ public abstract class Rocket extends SlimefunItem {
 
             if (!Slimefun.getProtectionManager().hasPermission(p, destBlock, Interaction.PLACE_BLOCK)) {
                 p.sendMessage(ChatColor.RED + "发射失败! 你没有权限降落在目标地点!");
-                BlockStorage.addBlockInfo(rocket, "isLaunching", "false");
+                ChunkStorage.untag(rocket, "isLaunching");
                 return;
             }
 
@@ -328,14 +329,30 @@ public abstract class Rocket extends SlimefunItem {
 
             rocket.setType(Material.AIR);
             BlockStorage.clearBlockInfo(rocket);
+            ChunkStorage.untag(rocket, "isLaunching");
         });
     }
 
-    protected abstract List<ItemStack> getAllowedFuels();
+    protected abstract Map<ItemStack, Double> getAllowedFuels();
 
     @Nonnull
     protected Particle getLaunchParticles() {
         return Particle.ASH;
     }
 
+    @Nonnull
+    @Override
+    public List<ItemStack> getDisplayRecipes() {
+        List<ItemStack> ret = new ArrayList<>();
+
+        for (Map.Entry<ItemStack, Double> entry : getAllowedFuels().entrySet()) {
+            ret.add(new CustomItemStack(
+                    entry.getKey(),
+                    ItemUtils.getItemName(entry.getKey()),
+                    "&7效率: " + entry.getValue() + 'x'
+            ));
+        }
+
+        return ret;
+    }
 }
