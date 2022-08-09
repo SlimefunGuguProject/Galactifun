@@ -148,7 +148,7 @@ public final class WorldManager implements Listener {
                         && world.atmosphere().requiresOxygenTank()
                         && !Galactifun.protectionManager().isOxygenBlock(p.getLocation())
                         && !SpaceSuitProfile.get(p).consumeOxygen(20)) {
-                    p.sendMessage(ChatColor.RED + "You have run out of oxygen!");
+                    p.sendMessage(ChatColor.RED + "你的氧气已耗尽!");
                     p.damage(8);
                 }
             }
