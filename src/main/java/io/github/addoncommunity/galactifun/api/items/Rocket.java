@@ -212,7 +212,7 @@ public abstract class Rocket extends SlimefunItem implements RecipeDisplayItem {
         sendLaunchMessage(120, p, launchMessages);
         sendLaunchMessage(160, p, launchMessages);
         Scheduler.run(200, () -> {
-            p.sendMessage(ChatColor.YELLOW + "Verifying blast awesomeness...");
+            p.sendMessage(ChatColor.YELLOW + "起飞...");
             Chest chest = (Chest) PaperLib.getBlockState(destBlock, false).getState();
             Inventory inv = chest.getBlockInventory();
             inv.addItem(fuelLeft);
