@@ -30,6 +30,7 @@ import io.github.addoncommunity.galactifun.base.items.TechnologicalSalvager;
 import io.github.addoncommunity.galactifun.base.items.knowledge.Observatory;
 import io.github.addoncommunity.galactifun.base.items.knowledge.PlanetaryAnalyzer;
 import io.github.addoncommunity.galactifun.base.items.protection.CoolingUnit;
+import io.github.addoncommunity.galactifun.base.items.protection.ForcefieldGenerator;
 import io.github.addoncommunity.galactifun.base.items.protection.IonDisperser;
 import io.github.addoncommunity.galactifun.base.items.protection.OxygenSealer;
 import io.github.addoncommunity.galactifun.base.items.protection.SpaceHeater;
@@ -370,17 +371,13 @@ public final class BaseItems {
             "&7当您离开/进入时",
             "&7将会自动打开/关闭"
     );
-    public static final SlimefunItemStack ION_ROCKET = new SlimefunItemStack(
-            "ION_ROCKET",
-            GalactifunHead.ION_ROCKET,
-            "&b离子火箭",
+    public static final SlimefunItemStack ENVIRONMENTAL_FORCEFIELD_GENERATOR = new SlimefunItemStack(
+            "ENVIRONMENTAL_FORCEFIELD_GENERATOR",
+            Material.DISPENSER,
+            "&f试验性力场发生器",
             "",
-            "&7它安装了专属的引擎",
-            "&7该引擎会高速排出离子",
-            "&7并提供极高的燃油效率",
-            "",
-            "&7燃料容量: 500",
-            "&7可载重量: 18"
+            "&7可以创建一个保留气体，",
+            "&7允许实体通过的力场"
     );
     //</editor-fold>
     //<editor-fold desc="Relics" defaultstate="collapsed">
@@ -462,6 +459,18 @@ public final class BaseItems {
             "",
             "&7燃料容量: " + TIER_THREE_FUEL,
             "&7可载重量: " + TIER_THREE_STORAGE
+    );
+    public static final SlimefunItemStack ION_ROCKET = new SlimefunItemStack(
+            "ION_ROCKET",
+            GalactifunHead.ION_ROCKET,
+            "&b离子火箭",
+            "",
+            "&7它安装了专属的引擎",
+            "&7该引擎会高速排出离子",
+            "&7并提供极高的燃油效率",
+            "",
+            "&7燃料容量: 500",
+            "&7可载重量: 18"
     );
     //</editor-fold>
 
@@ -663,6 +672,12 @@ public final class BaseItems {
                 BaseMats.ALUMINUM_COMPOSITE_SHEET, new ItemStack(Material.OBSERVER), BaseMats.ALUMINUM_COMPOSITE_SHEET,
                 BaseMats.ALUMINUM_COMPOSITE_SHEET, SlimefunItems.PROGRAMMABLE_ANDROID_MINER, BaseMats.ALUMINUM_COMPOSITE_SHEET,
                 BaseMats.ALUMINUM_COMPOSITE_SHEET, SlimefunItems.BLOCK_PLACER, BaseMats.ALUMINUM_COMPOSITE_SHEET
+        }).register(galactifun);
+
+        new ForcefieldGenerator(ENVIRONMENTAL_FORCEFIELD_GENERATOR, new ItemStack[] {
+                BaseMats.ALUMINUM_COMPOSITE_SHEET, BaseMats.ENDER_BLOCK, BaseMats.ALUMINUM_COMPOSITE_SHEET,
+                BaseMats.ALUMINUM_COMPOSITE_SHEET, ION_DISPERSER_1, BaseMats.ALUMINUM_COMPOSITE_SHEET,
+                BaseMats.ALUMINUM_COMPOSITE_SHEET, BaseMats.SPACE_GRADE_PLATE, BaseMats.ALUMINUM_COMPOSITE_SHEET
         }).register(galactifun);
 
         new FusionReactor(FUSION_REACTOR, new ItemStack[] {
