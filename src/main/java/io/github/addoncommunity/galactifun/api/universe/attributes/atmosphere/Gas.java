@@ -1,6 +1,11 @@
 package io.github.addoncommunity.galactifun.api.universe.attributes.atmosphere;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import io.github.addoncommunity.galactifun.api.universe.PlanetaryObject;
+import io.github.addoncommunity.galactifun.base.BaseUniverse;
+import io.github.addoncommunity.galactifun.core.CoreRecipeType;
 
 import lombok.Getter;
 
@@ -31,31 +36,66 @@ public enum Gas {
     METHANE("甲烷", "ea005531b6167a86fb09d6c0f3db60f2650162d0656c2908d07b377111d8f2a2"),
     HYDROCARBONS("碳氢化合物", "725691372e0734bfb57bb03690490661a83f053a3488860df3436ce1caa24d11"),
     HYDROGEN("氢气", "725691372e0734bfb57bb03690490661a83f053a3488860df3436ce1caa24d11"),
-    SULFUR("硫", "c7a1ece691ad28d17bbbcecb22270c85e1c9581485806264c676de67c272e2d0"),
-    AMMONIA("氨", "c7a1ece691ad28d17bbbcecb22270c85e1c9581485806264c676de67c272e2d0"),
+    AMMONIA("氨", "c7a1ece691ad28d17bbbcecb22270c85e1c9581485806264c676de67c272e2d0", CoreRecipeType.CHEMICAL_REACTOR, new ItemStack[] {
+            NITROGEN.item, HYDROGEN.item.asQuantity(3), null,
+            null, null, null,
+            null, null, null
+    }),
     OTHER;
 
     static {
         if (SlimefunItems.FREEZER_2.getItem() instanceof Freezer freezer) {
-            freezer.registerRecipe(10, Gas.NITROGEN.item(), SlimefunItems.REACTOR_COOLANT_CELL.asQuantity(4));
+            freezer.registerRecipe(10, NITROGEN.item(), SlimefunItems.REACTOR_COOLANT_CELL.asQuantity(4));
         }
+
         if (SlimefunItems.COMBUSTION_REACTOR.getItem() instanceof CombustionGenerator generator) {
-            generator.registerFuel(new MachineFuel(15, Gas.HYDROGEN.item()));
-            generator.registerFuel(new MachineFuel(20, Gas.SULFUR.item()));
-            generator.registerFuel(new MachineFuel(30, Gas.HYDROCARBONS.item()));
-            generator.registerFuel(new MachineFuel(70, Gas.AMMONIA.item()));
-            generator.registerFuel(new MachineFuel(200, Gas.METHANE.item()));
+            generator.registerFuel(new MachineFuel(15, HYDROGEN.item()));
+            generator.registerFuel(new MachineFuel(30, HYDROCARBONS.item()));
+            generator.registerFuel(new MachineFuel(70, AMMONIA.item()));
+            generator.registerFuel(new MachineFuel(200, METHANE.item()));
         }
+
         if (BaseItems.DIAMOND_ANVIL.getItem() instanceof DiamondAnvil anvil) {
-            anvil.registerRecipe(10, Gas.HYDROGEN.item().asQuantity(4), Gas.HELIUM.item());
-            anvil.registerRecipe(10, Gas.HELIUM.item().asQuantity(4), BaseMats.FUSION_PELLET);
+            anvil.registerRecipe(10, HYDROGEN.item().asQuantity(4), HELIUM.item());
+            anvil.registerRecipe(10, HELIUM.item().asQuantity(4), BaseMats.FUSION_PELLET);
         }
     }
 
     @Getter
     private final SlimefunItemStack item;
 
-    Gas(String texture) {
+    @Getter
+    private final SlimefunItem slimefunItem;
+
+    Gas(@Nonnull String texture) {
+        this(texture, CoreRecipeType.ATMOSPHERIC_HARVESTER);
+    }
+
+    @ParametersAreNonnullByDefault
+    Gas(String texture, RecipeType recipeType) {
+        this(texture, recipeType, new ItemStack[9]);
+    }
+
+    @ParametersAreNonnullByDefault
+    Gas(String name, String texture, RecipeType recipeType) {
+        this(name, texture, recipeType, new ItemStack[9]);
+    }
+
+    @ParametersAreNonnullByDefault
+    Gas(String name, String texture, RecipeType recipeType, ItemStack[] recipe) {
+        this.item = new SlimefunItemStack(
+                "ATMOSPHERIC_GAS_" + this.name(),
+                SlimefunUtils.getCustomHead(texture),
+                "&f" + name + "气体",
+                "",
+                "&f&o材质作者: Sefiraat"
+        );
+
+        new SlimefunItem(CoreItemGroup.ITEMS, this.item, RecipeType.NULL, new ItemStack[9]).register(Galactifun.instance());
+    }
+
+    @ParametersAreNonnullByDefault
+    Gas(String texture, RecipeType recipeType, ItemStack[] recipe) {
         this.item = new SlimefunItemStack(
                 "ATMOSPHERIC_GAS_" + this.name(),
                 SlimefunUtils.getCustomHead(texture),
@@ -67,20 +107,9 @@ public enum Gas {
         new SlimefunItem(CoreItemGroup.ITEMS, this.item, RecipeType.NULL, new ItemStack[9]).register(Galactifun.instance());
     }
 
-    Gas(String name, String texture) {
-        this.item = new SlimefunItemStack(
-                "ATMOSPHERIC_GAS_" + this.name(),
-                SlimefunUtils.getCustomHead(texture),
-                "&f" + name,
-                "",
-                "&f&o材质作者: Sefiraat"
-        );
-
-        new SlimefunItem(CoreItemGroup.ITEMS, this.item, RecipeType.NULL, new ItemStack[9]).register(Galactifun.instance());
-    }
-
     Gas() {
         this.item = null;
+        this.slimefunItem = null;
     }
 
 
@@ -90,4 +119,24 @@ public enum Gas {
         return ChatUtils.humanize(this.name());
     }
 
+    public static void setRecipes() {
+        setRecipe(OXYGEN, BaseUniverse.EARTH);
+        setRecipe(NITROGEN, BaseUniverse.EARTH);
+        setRecipe(CARBON_DIOXIDE, BaseUniverse.EARTH);
+        setRecipe(WATER, BaseUniverse.EARTH);
+        setRecipe(HELIUM, BaseUniverse.JUPITER);
+        setRecipe(ARGON, BaseUniverse.EARTH);
+        setRecipe(METHANE, BaseUniverse.SATURN);
+        setRecipe(HYDROCARBONS, BaseUniverse.TITAN);
+        setRecipe(HYDROGEN, BaseUniverse.JUPITER);
+    }
+
+    @ParametersAreNonnullByDefault
+    private static void setRecipe(Gas gas, PlanetaryObject planetaryObject) {
+        gas.slimefunItem().setRecipe(new ItemStack[] {
+                null, null, null,
+                null, planetaryObject.item(), null,
+                null, null, null
+        });
+    }
 }

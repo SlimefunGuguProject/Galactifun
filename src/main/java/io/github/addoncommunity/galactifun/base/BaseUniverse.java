@@ -233,6 +233,8 @@ public final class BaseUniverse {
         TITAN.register(galactifun);
         MARS.register(galactifun);
         THE_MOON.register(galactifun);
+
+        Gas.setRecipes();
     }
 
 }
