@@ -36,7 +36,7 @@ public enum Gas {
     METHANE("甲烷", "ea005531b6167a86fb09d6c0f3db60f2650162d0656c2908d07b377111d8f2a2"),
     HYDROCARBONS("碳氢化合物", "725691372e0734bfb57bb03690490661a83f053a3488860df3436ce1caa24d11"),
     HYDROGEN("氢气", "725691372e0734bfb57bb03690490661a83f053a3488860df3436ce1caa24d11"),
-    AMMONIA("氨", "c7a1ece691ad28d17bbbcecb22270c85e1c9581485806264c676de67c272e2d0", CoreRecipeType.CHEMICAL_REACTOR, new ItemStack[] {
+    AMMONIA("氨气", "c7a1ece691ad28d17bbbcecb22270c85e1c9581485806264c676de67c272e2d0", CoreRecipeType.CHEMICAL_REACTOR, new ItemStack[] {
             NITROGEN.item, HYDROGEN.item.asQuantity(3), null,
             null, null, null,
             null, null, null
@@ -67,13 +67,9 @@ public enum Gas {
     @Getter
     private final SlimefunItem slimefunItem;
 
-    Gas(@Nonnull String texture) {
-        this(texture, CoreRecipeType.ATMOSPHERIC_HARVESTER);
-    }
-
     @ParametersAreNonnullByDefault
-    Gas(String texture, RecipeType recipeType) {
-        this(texture, recipeType, new ItemStack[9]);
+    Gas(String name, String texture) {
+        this(name, texture, CoreRecipeType.ATMOSPHERIC_HARVESTER);
     }
 
     @ParametersAreNonnullByDefault
@@ -86,25 +82,13 @@ public enum Gas {
         this.item = new SlimefunItemStack(
                 "ATMOSPHERIC_GAS_" + this.name(),
                 SlimefunUtils.getCustomHead(texture),
-                "&f" + name + "气体",
+                "&f" + name + " 气管",
                 "",
                 "&f&o材质作者: Sefiraat"
         );
 
-        new SlimefunItem(CoreItemGroup.ITEMS, this.item, RecipeType.NULL, new ItemStack[9]).register(Galactifun.instance());
-    }
-
-    @ParametersAreNonnullByDefault
-    Gas(String texture, RecipeType recipeType, ItemStack[] recipe) {
-        this.item = new SlimefunItemStack(
-                "ATMOSPHERIC_GAS_" + this.name(),
-                SlimefunUtils.getCustomHead(texture),
-                "&f" + ChatUtils.humanize(this.name()) + "气体",
-                "",
-                "&f&o材质作者: Sefiraat"
-        );
-
-        new SlimefunItem(CoreItemGroup.ITEMS, this.item, RecipeType.NULL, new ItemStack[9]).register(Galactifun.instance());
+        this.slimefunItem = new SlimefunItem(CoreItemGroup.ITEMS, this.item, recipeType, recipe);
+        this.slimefunItem.register(Galactifun.instance());
     }
 
     Gas() {
