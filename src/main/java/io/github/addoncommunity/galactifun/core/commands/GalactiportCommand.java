@@ -25,7 +25,7 @@ import io.github.thebusybiscuit.slimefun4.libraries.paperlib.PaperLib;
 public final class GalactiportCommand extends SubCommand {
 
     public GalactiportCommand() {
-        super("world", "将您传送到指定世界", true);
+        super("world", "传送到指定世界", true);
     }
 
     @Override

@@ -17,7 +17,7 @@ import io.github.mooy1.infinitylib.commands.SubCommand;
 
 public class AlienRemoveCommand extends SubCommand {
     public AlienRemoveCommand() {
-        super("remove", "Removes an alien based on uuid", true);
+        super("remove", "根据UUID移除外星人", true);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class AlienRemoveCommand extends SubCommand {
 
             entity.remove();
         } catch (IllegalArgumentException ignored) {
-            p.sendMessage(ChatColor.RED + "Invalid UUID!");
+            p.sendMessage(ChatColor.RED + "无效的 UUID!");
         }
     }
 

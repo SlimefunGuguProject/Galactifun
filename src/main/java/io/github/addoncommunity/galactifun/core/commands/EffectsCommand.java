@@ -17,7 +17,7 @@ import io.github.mooy1.infinitylib.commands.SubCommand;
 public final class EffectsCommand extends SubCommand {
 
     public EffectsCommand() {
-        super("effects", "获取当前世界的所有效果", false);
+        super("effects", "查看当前世界的所有效果", false);
     }
 
     @Override

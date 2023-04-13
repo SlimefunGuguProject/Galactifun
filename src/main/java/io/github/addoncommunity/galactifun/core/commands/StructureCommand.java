@@ -32,7 +32,7 @@ public final class StructureCommand extends SubCommand {
     private final File saveFolder;
 
     public StructureCommand(Galactifun galactifun) {
-        super("structure", "结构命令", true);
+        super("structure", "结构指令", true);
 
         this.saveFolder = new File(galactifun.getDataFolder(), "saved_structures");
         this.pos1 = Galactifun.createKey("pos1");
