@@ -82,9 +82,9 @@
 
         <dependency>
             <groupId>net.guizhanss</groupId>
-            <artifactId>GuizhanLib</artifactId>
-            <version>0.9.9</version>
-            <scope>compile</scope>
+            <artifactId>GuizhanLibPlugin</artifactId>
+            <version>1.2.0</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -131,10 +131,6 @@
                         <relocation>
                             <pattern>it.unimi.dsi.fastutil</pattern>
                             <shadedPattern>io.github.addoncommunity.galactifun.fastutil</shadedPattern>
-                        </relocation>
-                        <relocation>
-                            <pattern>net.guizhanss.guizhanlib</pattern>
-                            <shadedPattern>io.github.addoncommunity.galactifun.guizhanlib</shadedPattern>
                         </relocation>
                     </relocations>
                     <filters>

@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 
 import lombok.Getter;
 
-import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
+import net.guizhanss.guizhanlibplugin.updater.GuizhanUpdater;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -80,6 +80,12 @@ public final class Galactifun extends AbstractAddon {
 
         if (!isTest) {
             boolean shouldDisable = false;
+            if (!getServer().getPluginManager().isPluginEnabled("GuizhanLibPlugin")) {
+                getLogger().log(Level.SEVERE, "本插件需要 鬼斩前置库插件(GuizhanLibPlugin) 才能运行!");
+                getLogger().log(Level.SEVERE, "从此处下载: https://50l.cc/gzlib");
+                getServer().getPluginManager().disablePlugin(this);
+                return;
+            }
             if (!PaperLib.isPaper()) {
                 log(Level.SEVERE, "Galactifun 只支持Paper以及Paper的衍生服务端(例如Airplane和Purpur)");
                 log(Level.SEVERE, "请使用Paper或者Paper的衍生服务端");
@@ -102,7 +108,7 @@ public final class Galactifun extends AbstractAddon {
             }
 
             if (getConfig().getBoolean("auto-update", true) && getDescription().getVersion().startsWith("Build")) {
-                new GuizhanBuildsUpdater(this, getFile(), "baoad", "Galactifun", "master", false, "zh-CN").start();
+                GuizhanUpdater.start(this, getFile(), "baoad", "Galactifun", "master");
             }
         }
 
