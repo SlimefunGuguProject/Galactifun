@@ -162,9 +162,9 @@ public abstract class Rocket extends SlimefunItem implements RecipeDisplayItem {
                     );
                     destBlock.getChunk().load();
                     if (!destBlock.getWorld().getWorldBorder().isInside(destBlock.getLocation())) {
-                        p.sendMessage(ChatColor.RED + "Destination is outside of world border");
+                        p.sendMessage(ChatColor.RED + "目标正处于世界边界之外");
                     } else if (!Slimefun.getProtectionManager().hasPermission(p, destBlock, Interaction.PLACE_BLOCK)) {
-                        p.sendMessage(ChatColor.RED + "You do not have permission to land there");
+                        p.sendMessage(ChatColor.RED + "你没有权限降落在目标地点!");
                     } else {
                         Block down = destBlock.getRelative(BlockFace.DOWN);
                         if (down.getType() == Material.CHEST) {
