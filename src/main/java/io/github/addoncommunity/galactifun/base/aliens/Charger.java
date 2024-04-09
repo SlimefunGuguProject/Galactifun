@@ -9,7 +9,7 @@ import io.github.addoncommunity.galactifun.api.aliens.Alien;
 public final class Charger extends Alien<Goat> {
 
     public Charger() {
-        super(Goat.class, "CHARGER", "充电", 30, 5);
+        super(Goat.class, "CHARGER", "冲锋", 30, 5);
     }
 
     @Override
