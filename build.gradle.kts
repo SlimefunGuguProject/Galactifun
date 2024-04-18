@@ -18,6 +18,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
     compileOnly("io.github.TheBusyBiscuit:Slimefun4:RC-37")
     compileOnly("com.google.code.findbugs:jsr305:3.0.2")
+    compileOnly("net.guizhanss:GuizhanLibPlugin:1.7.6")
 
     testImplementation("com.github.seeseemelk:MockBukkit-v1.18:2.85.2")
 }
@@ -30,7 +31,8 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 tasks.shadowJar {
     relocate("io.github.mooy1.infinitylib", "io.github.addoncommunity.galactifun.infinitylib")
 
-    archiveFileName = "galactifun.jar"
+    minimize()
+    archiveClassifier = ""
 }
 
 bukkit {
@@ -40,7 +42,7 @@ bukkit {
     version = project.version.toString()
     authors = listOf("Seggan", "Mooy1", "GallowsDove", "ProfElements")
     apiVersion = "1.18"
-    softDepend = listOf("ClayTech")
+    softDepend = listOf("ClayTech", "GuizhanLibPlugin")
     loadBefore = listOf("Multiverse-Core")
     depend = listOf("Slimefun")
 
