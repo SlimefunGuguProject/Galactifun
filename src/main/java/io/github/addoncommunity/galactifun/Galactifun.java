@@ -115,15 +115,11 @@ public final class Galactifun extends AbstractAddon {
             }
 
             if (getConfig().getBoolean("auto-update", true) && getDescription().getVersion().startsWith("Build")) {
-                GuizhanUpdater.start(this, getFile(), "baoad", "Galactifun", "master");
+                GuizhanUpdater.start(this, getFile(), "SlimefunGuguProject", "Galactifun", "master");
             }
         }
 
         new Metrics(this, 11613);
-
-        if (!isTest && this.getConfig().getBoolean("auto-update") && !getPluginVersion().contains("MODIFIED")) {
-            new BlobBuildUpdater(this, this.getFile(), "Galactifun").start();
-        }
 
         this.alienManager = new AlienManager(this);
         this.worldManager = new WorldManager(this);
