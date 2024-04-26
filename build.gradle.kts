@@ -16,7 +16,7 @@ repositories {
 dependencies {
     api("io.github.mooy1:InfinityLib:1.3.7")
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
-    compileOnly("io.github.TheBusyBiscuit:Slimefun4:RC-37")
+    compileOnly("com.github.StarWishsama:Slimefun4:2024.3")
     compileOnly("com.google.code.findbugs:jsr305:3.0.2")
     compileOnly("net.guizhanss:GuizhanLibPlugin:1.7.6")
 
