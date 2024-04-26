@@ -332,7 +332,7 @@ public final class WorldManager implements Listener {
         if (b != null && Tag.BEDS.isTagged(b.getType())) {
             e.setCancelled(true);
             p.setBedSpawnLocation(p.getLocation(), true);
-            p.sendMessage("Respawn point set");
+            p.sendMessage("已设置重生点");
         }
     }
 
