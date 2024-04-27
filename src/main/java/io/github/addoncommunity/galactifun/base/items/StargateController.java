@@ -268,20 +268,14 @@ public final class StargateController extends SlimefunItem implements Listener {
         String bAddress;
         try {
             bAddress = new String(Base64.getDecoder().decode(destination));
-        } catch (IllegalArgumentException e) {
-            p.sendMessage(ChatColor.RED + "无效的地址!");
-            return;
-        }
-
-        String[] parts = bAddress.split(";");
-        try {
+            String[] parts = bAddress.split(";");
             dest = new Location(
                     Galactifun.instance().getServer().getWorld(parts[0]),
                     Integer.parseInt(parts[1]),
                     Integer.parseInt(parts[2]),
                     Integer.parseInt(parts[3])
             );
-        } catch (NumberFormatException e) {
+        } catch (IllegalArgumentException e) {
             p.sendMessage(ChatColor.RED + "无效的地址!");
             return;
         }
@@ -289,6 +283,12 @@ public final class StargateController extends SlimefunItem implements Listener {
         Optional<List<Block>> portalOptional = getPortalBlocks(b);
         if (portalOptional.isEmpty()) {
             p.sendMessage(ChatColor.RED + "星门没有激活...");
+            return;
+        }
+
+        // 检测目标是否为星门
+        if (!isPartOfStargate(dest.getBlock())) {
+            p.sendMessage(ChatColor.RED + "无效的地址!");
             return;
         }
 
