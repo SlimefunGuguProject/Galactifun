@@ -82,7 +82,7 @@ public enum Gas {
         this.item = new SlimefunItemStack(
                 "ATMOSPHERIC_GAS_" + this.name(),
                 SlimefunUtils.getCustomHead(texture),
-                "&f" + name + " 气管",
+                "&f" + name + "气罐",
                 "",
                 "&f&o材质作者: Sefiraat"
         );
