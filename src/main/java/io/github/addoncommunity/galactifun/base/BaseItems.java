@@ -93,7 +93,7 @@ public final class BaseItems {
     public static final SlimefunItemStack RADIATION_RESISTANCE_UPGRADE = new SlimefunItemStack(
             "RADIATION_RESISTANCE_UPGRADE",
             Material.IRON_BLOCK,
-            "&7抗辐射升级机",
+            "&7抗辐射升级模块",
             "",
             "&8增强你的宇航服的抗辐射"
     );
@@ -205,7 +205,7 @@ public final class BaseItems {
     );
     public static final SlimefunItemStack DIAMOND_ANVIL = new SlimefunItemStack(
             "DIAMOND_ANVIL",
-            Material.ANVIL,
+            Material.PISTON,
             "&f钻石砧",
             "",
             "&7材料的密度压缩更加的微小",

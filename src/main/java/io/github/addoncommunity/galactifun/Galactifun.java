@@ -37,6 +37,7 @@ import io.github.mooy1.infinitylib.core.AbstractAddon;
 import io.github.mooy1.infinitylib.metrics.bukkit.Metrics;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.BlobBuildUpdater;
 import io.github.thebusybiscuit.slimefun4.libraries.paperlib.PaperLib;
 
 
@@ -114,7 +115,7 @@ public final class Galactifun extends AbstractAddon {
             }
 
             if (getConfig().getBoolean("auto-update", true) && getDescription().getVersion().startsWith("Build")) {
-                GuizhanUpdater.start(this, getFile(), "baoad", "Galactifun", "master");
+                GuizhanUpdater.start(this, getFile(), "SlimefunGuguProject", "Galactifun", "master");
             }
         }
 
