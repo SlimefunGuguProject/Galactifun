@@ -671,7 +671,7 @@ public final class BaseItems {
         new AutomaticDoor(AUTOMATIC_DOOR, new ItemStack[] {
                 BaseMats.ALUMINUM_COMPOSITE_SHEET, new ItemStack(Material.OBSERVER), BaseMats.ALUMINUM_COMPOSITE_SHEET,
                 BaseMats.ALUMINUM_COMPOSITE_SHEET, SlimefunItems.PROGRAMMABLE_ANDROID_MINER, BaseMats.ALUMINUM_COMPOSITE_SHEET,
-                BaseMats.ALUMINUM_COMPOSITE_SHEET, SlimefunItems.BLOCK_PLACER, BaseMats.ALUMINUM_COMPOSITE_SHEET
+                BaseMats.ALUMINUM_COMPOSITE_SHEET, SlimefunItems.STEEL_THRUSTER, BaseMats.ALUMINUM_COMPOSITE_SHEET
         }).register(galactifun);
 
         new ForcefieldGenerator(ENVIRONMENTAL_FORCEFIELD_GENERATOR, new ItemStack[] {
