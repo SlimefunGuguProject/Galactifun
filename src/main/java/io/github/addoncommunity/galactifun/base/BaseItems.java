@@ -137,12 +137,7 @@ public final class BaseItems {
             "&f发射台核心",
             "",
             "&7需要用8个&f发射台地板&7包围发射台核心",
-            "&7来使用",
-            " ",
-            "&4说明:",
-            "&4火箭请不要直接放到发射台上，先把发射台核心换成普通方块,",
-            "&4放上去之后再换成发射台核心，否则放火箭的时候会打开发射台核心的界面,",
-            "&4导致火箭坏掉变成头!"
+            "&7来使用"
     );
 
     public static final SlimefunItemStack LAUNCH_PAD_FLOOR = new SlimefunItemStack(
@@ -443,12 +438,7 @@ public final class BaseItems {
             "&4一阶化工火箭",
             "",
             "&7燃料容量: " + TIER_ONE_FUEL,
-            "&7可载重量: " + TIER_ONE_STORAGE,
-            " ",
-            "&4说明:",
-            "&4火箭请不要直接放到发射台上，先把发射台核心换成普通方块,",
-            "&4放上去之后再换成发射台核心，否则放火箭的时候会打开发射台核心的界面,",
-            "&4导致火箭坏掉变成头!"
+            "&7可载重量: " + TIER_ONE_STORAGE
     );
     private static final int TIER_TWO_FUEL = 100;
     private static final int TIER_TWO_STORAGE = 18;
@@ -458,12 +448,7 @@ public final class BaseItems {
             "&4二阶化工火箭",
             "",
             "&7燃料容量: " + TIER_TWO_FUEL,
-            "&7可载重量: " + TIER_TWO_STORAGE,
-            " ",
-            "&4说明:",
-            "&4火箭请不要直接放到发射台上，先把发射台核心换成普通方块,",
-            "&4放上去之后再换成发射台核心，否则放火箭的时候会打开发射台核心的界面,",
-            "&4导致火箭坏掉变成头!"
+            "&7可载重量: " + TIER_TWO_STORAGE
     );
     private static final int TIER_THREE_FUEL = 500;
     private static final int TIER_THREE_STORAGE = 36;
@@ -473,12 +458,7 @@ public final class BaseItems {
             "&4三阶化工火箭",
             "",
             "&7燃料容量: " + TIER_THREE_FUEL,
-            "&7可载重量: " + TIER_THREE_STORAGE,
-            " ",
-            "&4说明:",
-            "&4火箭请不要直接放到发射台上，先把发射台核心换成普通方块,",
-            "&4放上去之后再换成发射台核心，否则放火箭的时候会打开发射台核心的界面,",
-            "&4导致火箭坏掉变成头!"
+            "&7可载重量: " + TIER_THREE_STORAGE
     );
     public static final SlimefunItemStack ION_ROCKET = new SlimefunItemStack(
             "ION_ROCKET",
@@ -490,12 +470,7 @@ public final class BaseItems {
             "&7并提供极高的燃油效率",
             "",
             "&7燃料容量: 500",
-            "&7可载重量: 18",
-            " ",
-            "&4说明:",
-            "&4火箭请不要直接放到发射台上，先把发射台核心换成普通方块,",
-            "&4放上去之后再换成发射台核心，否则放火箭的时候会打开发射台核心的界面,",
-            "&4导致火箭坏掉变成头!"
+            "&7可载重量: 18"
     );
     //</editor-fold>
 
