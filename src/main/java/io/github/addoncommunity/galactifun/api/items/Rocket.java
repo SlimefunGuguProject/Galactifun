@@ -150,6 +150,13 @@ public abstract class Rocket extends SlimefunItem implements RecipeDisplayItem {
         }, (player, destination) -> {
             player.closeInventory();
             int usedFuel = (int) Math.ceil(destination.distanceTo(currentWorld) / (DISTANCE_PER_FUEL * eff));
+
+            if (BSUtils.getStoredBoolean(b.getLocation(), "isLaunching")) {
+                p.sendMessage(ChatColor.RED + "火箭正在发射!");
+                return;
+            }
+            BSUtils.addBlockInfo(b.getLocation().getBlock(), "isLaunching", true);
+
             p.sendMessage(ChatColor.YELLOW + "请输入你要降落的坐标 <x> <z> (例如: -123 456) 或输入其他内容取消:");
             ChatUtils.awaitInput(p, s -> {
                 if (Util.COORD_PATTERN.matcher(s).matches()) {
@@ -182,6 +189,7 @@ public abstract class Rocket extends SlimefunItem implements RecipeDisplayItem {
                     }
                 } else {
                     p.sendMessage(ChatColor.RED + "已取消发射");
+                    BSUtils.addBlockInfo(b.getLocation().getBlock(), "isLaunching", false);
                 }
             });
         }).open(p);
