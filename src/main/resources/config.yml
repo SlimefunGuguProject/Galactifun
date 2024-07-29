@@ -6,6 +6,9 @@ worlds:
   # 地球世界的名称，默认应为 world
   earth-name: world
 
+  # If set to true, players can use Nether portals in Galactifun planet worlds.
+  allow-nether-portals: false
+
 aliens:
 
   # 外星人的Ticker间隔，单位为MC刻，1秒有20MC刻
@@ -32,8 +35,10 @@ rockets:
     - 人类一大步
 
 other:
+
   # 自动门检测玩家的范围
   auto-door-range: 2
+
   # 无法作为自动门的方块
   auto-door-banned-types:
     - BEDROCK
@@ -42,3 +47,7 @@ other:
     - COMMAND_BLOCK
     - END_PORTAL
     - STRUCTURE_BLOCK
+
+  # Max range for sealed command. High values may impact performance, low values may miss sealed areas.
+  # More info: https://github.com/Slimefun-Addon-Community/Galactifun/wiki/Sealing#Range
+  sealed-command-max-range: 300000
