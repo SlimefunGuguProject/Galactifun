@@ -114,7 +114,7 @@ public abstract class Rocket extends SlimefunItem implements RecipeDisplayItem {
             public void onPlayerBreak(BlockBreakEvent e, ItemStack itemStack, List<ItemStack> list) {
                 if (Boolean.parseBoolean(BlockStorage.getLocationInfo(e.getBlock().getLocation(), "isLaunching"))) {
                     e.setCancelled(true);
-                    e.getPlayer().sendMessage(ChatColor.RED + "The rocket is currently launching!");
+                    e.getPlayer().sendMessage(ChatColor.RED + "火箭正在发射!");
                 }
             }
         });
