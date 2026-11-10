@@ -6,9 +6,9 @@ Slimefun-Addon-Galactifun里面加入了星系,恒星系统,行星,卫星,火箭
 
 ## 下载
 
-点击下面以下载: 
+[下载 Galactifun](https://resources.guizhanss.com/plugin/Galactifun)
 
-[![构建 成功](https://builds.guizhanss.net/f/baoad/Galactifun/master/badge.svg)](https://builds.guizhanss.net/baoad/Galactifun/master)
+点击下面以下载: 
 
 ## 社区
 
