@@ -1,0 +1,7 @@
+name: RocketTest
+main: rockettest.RocketTest
+version: 1.0
+api-version: '1.21'
+depend: [Slimefun, Galactifun]
+commands:
+  rockettest: {}
