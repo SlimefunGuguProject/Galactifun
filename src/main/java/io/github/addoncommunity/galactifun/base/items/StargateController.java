@@ -357,19 +357,31 @@ public final class StargateController extends SlimefunItem implements Listener {
 
         if (LEGACY_GATEWAY_WORLDS && !p.getWorld().equals(arrival.getWorld())) {
             e.setCancelled(true);
-            // Allow the gateway state to clear before starting a new teleport.
-            Scheduler.run(2, () -> {
-                if (!p.isOnline() || !p.getWorld().equals(from.getWorld())) return;
-
-                Galactifun plugin = Galactifun.instance();
-                p.setMetadata("CanTpAlienWorld", new FixedMetadataValue(plugin, true));
-                p.teleportAsync(arrival).whenComplete((success, error) ->
-                        p.removeMetadata("CanTpAlienWorld", plugin));
-            });
+            teleportAcrossLegacyWorlds(p, from, arrival);
             return;
         }
 
         e.setTo(arrival);
+    }
+
+    private static void teleportAcrossLegacyWorlds(Player player, Location from, Location arrival) {
+        if (player.hasMetadata("disableStargate")) return;
+
+        Galactifun plugin = Galactifun.instance();
+        player.setMetadata("disableStargate", new FixedMetadataValue(plugin, true));
+        // Allow the gateway state to clear before starting a new teleport.
+        Scheduler.run(2, () -> {
+            if (!player.isOnline() || !player.getWorld().equals(from.getWorld())) {
+                player.removeMetadata("disableStargate", plugin);
+                return;
+            }
+
+            player.setMetadata("CanTpAlienWorld", new FixedMetadataValue(plugin, true));
+            player.teleportAsync(arrival).whenComplete((success, error) -> {
+                player.removeMetadata("CanTpAlienWorld", plugin);
+                player.removeMetadata("disableStargate", plugin);
+            });
+        });
     }
 
     private static final record ComponentPosition(int y, int z) {
