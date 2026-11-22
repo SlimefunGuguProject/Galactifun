@@ -10,6 +10,7 @@ import java.util.Optional;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -25,7 +26,6 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 import com.destroystokyo.paper.event.player.PlayerTeleportEndGatewayEvent;
 import io.github.addoncommunity.galactifun.Galactifun;
-import io.github.addoncommunity.galactifun.api.worlds.AlienWorld;
 import io.github.addoncommunity.galactifun.base.BaseItems;
 import io.github.addoncommunity.galactifun.util.BSUtils;
 import io.github.mooy1.infinitylib.common.Events;
@@ -55,6 +55,11 @@ public final class StargateController extends SlimefunItem implements Listener {
     private static final int ADDRESS_SLOT = 3;
     private static final int DESTINATION_SLOT = 4;
     private static final int DEACTIVATE_SLOT = 5;
+
+    // Before 1.21.4, changing the gateway event destination may only change
+    // its coordinates. Keep a separate teleport for cross-world travel there.
+    private static final boolean LEGACY_GATEWAY_WORLDS =
+            Bukkit.getMinecraftVersion().matches("1\\.(1[7-9]|20)(\\..*)?|1\\.21(\\.[1-3])?");
 
     private static final ComponentPosition[] RING_POSITIONS = new ComponentPosition[] {
             // bottom
@@ -323,31 +328,48 @@ public final class StargateController extends SlimefunItem implements Listener {
         Location dest = BSUtils.getStoredLocation(exit, "dest");
         if (dest == null) return;
 
-        e.setCancelled(true);
-
         Player p = e.getPlayer();
-        if (p.hasMetadata("disableStargate")) return;
+        if (dest.getWorld() == null) {
+            e.setCancelled(true);
+            p.sendMessage(ChatColor.RED + "目标位置无法抵达");
+            return;
+        }
 
         Block b = dest.getBlock();
-        if (BlockStorage.check(b, BaseItems.STARGATE_CONTROLLER.getItemId()) &&
+        if (!BlockStorage.check(b, BaseItems.STARGATE_CONTROLLER.getItemId()) ||
                 StargateController.getPortalBlocks(b).isEmpty()) {
+            e.setCancelled(true);
             p.sendMessage(ChatColor.RED + "目标星门未激活");
             return;
         }
 
         Block destBlock = b.getRelative(1, 0, 0);
-        if (destBlock.getType().isEmpty()) {
-            // Check if the player is teleporting to an alien world, and if so, allow them to
-            AlienWorld world = Galactifun.worldManager().getAlienWorld(destBlock.getWorld());
-            if (world != null) {
-                e.getPlayer().setMetadata("CanTpAlienWorld", new FixedMetadataValue(Galactifun.instance(), true));
-            }
-            p.teleportAsync(destBlock.getLocation());
-            p.setMetadata("disableStargate", new FixedMetadataValue(Galactifun.instance(), true));
-            Scheduler.run(10, () -> p.removeMetadata("disableStargate", Galactifun.instance()));
-        } else {
+        if (!destBlock.getType().isEmpty()) {
+            e.setCancelled(true);
             p.sendMessage(ChatColor.RED + "目标位置无法抵达");
+            return;
         }
+
+        Location arrival = destBlock.getLocation().add(0.5, 0, 0.5);
+        Location from = e.getFrom();
+        arrival.setYaw(from.getYaw());
+        arrival.setPitch(from.getPitch());
+
+        if (LEGACY_GATEWAY_WORLDS && !p.getWorld().equals(arrival.getWorld())) {
+            e.setCancelled(true);
+            // Allow the gateway state to clear before starting a new teleport.
+            Scheduler.run(2, () -> {
+                if (!p.isOnline() || !p.getWorld().equals(from.getWorld())) return;
+
+                Galactifun plugin = Galactifun.instance();
+                p.setMetadata("CanTpAlienWorld", new FixedMetadataValue(plugin, true));
+                p.teleportAsync(arrival).whenComplete((success, error) ->
+                        p.removeMetadata("CanTpAlienWorld", plugin));
+            });
+            return;
+        }
+
+        e.setTo(arrival);
     }
 
     private static final record ComponentPosition(int y, int z) {
